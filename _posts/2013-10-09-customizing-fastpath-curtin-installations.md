@@ -20,66 +20,10 @@ Working off my previous entry about **[using fastpath installer in MAAS][1]** I 
 
 **Setting up vlans during a fastpath installation.**
 
-On the **[MAAS][5]** server edit `/etc/maas/preseeds/curtin_userdata` and write the following (substituting your vlan configuration):
+On the **[MAAS][5]** server edit `/etc/maas/preseeds/curtin_userdata`
+and write the following (substituting your vlan configuration):
 
-```
-    # vlan config
-    bucket:
-      &myinterfaces |
-       # This file describes the network interfaces available on your system
-       # and how to activate them. For more information, see interfaces(5).
-    
-       # The loopback network interface
-       auto lo
-       iface lo inet loopback
-    
-       # The primary network interface
-       auto eth0
-       iface eth0 inet dhcp
-       auto vlan5
-       auto vlan100
-       iface vlan5 inet static
-         address 10.0.0.18
-         netmask 255.255.255.0
-         vlan-raw-device eth0
-       iface vlan100 inet static
-         address 192.168.66.118
-         netmask 255.255.255.0
-         vlan-raw-device eth0
-    
-    
-    #cloud-config
-    debconf_selections:
-     maas: |
-      {{for line in str(curtin_preseed).splitlines()}}
-      {{line}}
-      {{endfor}}
-    early_commands:
-      update: apt-get update
-      vlan: apt-get install vlan -q -y
-    
-    late_commands:
-      maas: [wget, '--no-proxy', '{{node_disable_pxe_url|escape.shell}}', '--post-data', '{{node_disable_pxe_data|escape.shell}}', '-O', '/dev/null']
-      load_8021q: ['sh', '-c', 'echo 8021q >> $TARGET_MOUNT_POINT/etc/modules']
-    
-    network_commands:
-      vlans: ['sh', '-c', 'printf "$1" > "$OUTPUT_INTERFACES"', '--', *myinterfaces]
-    
-    power_state:
-      mode: reboot
-    
-    \{\{if node.architecture in {'i386/generic', 'amd64/generic'} \}\}
-    apt_mirror: http://\{\{main_archive_hostname\}\}/\{\{main_archive_directory\}\}
-    {{else}}
-    apt_mirror: http://\{\{ports_archive_hostname\}\}/\{\{ports_archive_directory\}\}
-    \{\{endif\}\}
-    
-    {{if http_proxy }}
-    apt_proxy: {{http_proxy}}
-    {{else}}
-    apt_proxy: http://{{server_host}}:8000/
-    {{endif}}
-```
+<script src="https://gist.github.com/battlemidget/edacd7abea5446d8bcc1.js"></script>
 
 Once your node is deployed simply ssh into the instance and verify the `8021q` module is loaded and that `ifconfig` reports your added vlans.
 
