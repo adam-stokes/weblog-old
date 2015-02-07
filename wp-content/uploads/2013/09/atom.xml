@@ -1,0 +1,2462 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>AdamStokes</title><link href="http://astokes.org"/><link href="http://astokes.org/post/atom.xml" rel="self"/><author><name>Adam Stokes</name></author><id>http://astokes.org</id><updated>2013-09-21T00:02:35Z</updated><generator uri="http://search.cpan.org/dist/XML-Atom-SimpleFeed/" version="0.86">XML::Atom::SimpleFeed</generator><entry><title>New mojolicious plugin: leaflet.js</title><link href="http://astokes.org/post/new-mojolicious-plugin-leafletjs"/><id>http://astokes.org/post/new-mojolicious-plugin-leafletjs</id><content type="html">&lt;p&gt;Started working on a new Mojolicious plugin for integrating the popular javascript mapping library &lt;a href=&#34;http://leafletjs.com&#34;&gt;leaflet.js&lt;/a&gt;. You can find it on &lt;a href=&#34;https://metacpan.org/release/ADAMJS/Mojolicious-Plugin-Leafletjs-0.001&#34;&gt;metacpan&lt;/a&gt; or help with contributions at the &lt;a href=&#34;https://github.com/battlemidget/Mojolicious-Plugin-Leafletjs&#34;&gt;github project page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A quick synopsis of how to use it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  # Mojolicious
+  $self-&#38;gt;plugin(&#39;Leafletjs&#39;);
+
+  # Mojolicious::Lite
+  plugin &#39;Leafletjs&#39;;
+
+  # In your template
+  &#38;lt;%= leaflet {
+    name      =&#38;gt; &#39;map1&#39;,
+    latitude =&#38;gt; &#39;35.9239&#39;,
+    longitude  =&#38;gt; &#39;-78.4611&#39;,
+    zoomLevel =&#38;gt; 18,
+    markers   =&#38;gt; [
+      {   name      =&#38;gt; &#39;marker1&#39;,
+          latitude =&#38;gt; &#39;35.9239&#39;,
+          longitude  =&#38;gt; &#39;-78.4611&#39;,
+          popup     =&#38;gt; &#39;A new message tada!&#39;,
+      },
+      {   name      =&#38;gt; &#39;marker2&#39;,
+          latitude =&#38;gt; &#39;35.9235&#39;,
+          longitude  =&#38;gt; &#39;-78.4610&#39;,
+          popup     =&#38;gt; &#39;A second popup here!&#39;,
+      }
+    ],
+  }
+  %&#38;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;An example of a Mojolicious Lite application can be found in &lt;a href=&#34;https://github.com/battlemidget/Mojolicious-Plugin-Leafletjs/tree/master/eg&#34;&gt;the examples directory on github&lt;/a&gt;&lt;/p&gt;
+</content><updated>2013-09-05T02:40:52Z</updated></entry><entry><title>perl cms - skryf updated to version 0.12</title><link href="http://astokes.org/post/perl-cms---skryf-updated-to-version-012"/><id>http://astokes.org/post/perl-cms---skryf-updated-to-version-012</id><content type="html">&lt;p&gt;Released a new version of &lt;strong&gt;skryf&lt;/strong&gt; a perl cms engine. Some features to highlight are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Markdown Editor&lt;/li&gt;
+&lt;li&gt;Enhanced wiki plugin&lt;/li&gt;
+&lt;li&gt;Extended csrf protection for forms and ajax requests&lt;/li&gt;
+&lt;li&gt;Automated menu generator and hooks for new plugins&lt;/li&gt;
+&lt;li&gt;Enhanced admin section for maintaining your cms&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Take a look at the &lt;a href=&#34;/pages/CmsTodo&#34;&gt;Todo List&lt;/a&gt; for more ideas on what&#39;s ahead.&lt;/p&gt;
+</content><updated>2013-09-04T05:40:11Z</updated></entry><entry><title>quickly beautify your javascript in emacs</title><link href="http://astokes.org/post/quickly-beautify-your-javascript-in-emacs"/><id>http://astokes.org/post/quickly-beautify-your-javascript-in-emacs</id><content type="html">&lt;p&gt;This is for the javascript version of js-beautify and could easily apply to their python version as well. You&#39;ll need to have node installed with npm and run the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ sudo npm install -g js-beautify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, open up your emacs init file (&lt;strong&gt;~/.emacs.d/init.el&lt;/strong&gt;) and add the following lisp code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  (defun jstidy ()
+    &#34;Run js-beautify on the current region or buffer.&#34;
+    (interactive)
+    (save-excursion
+      (unless mark-active (mark-defun))
+      (shell-command-on-region (point) (mark) &#34;js-beautify -f -&#34; nil t)))
+  (global-set-key &#34;\C-cg&#34; &#39;jstidy)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you&#39;ve re-evaluated or restarted emacs the (CTRL+c then g) will be bound to the &lt;em&gt;jstidy&lt;/em&gt; function.&lt;/p&gt;
+
+&lt;p&gt;Finally, load up any javascript file and either mark a region or not and press the key commands to execute jstidy and you should see your code re-formatted nicely.&lt;/p&gt;
+</content><updated>2013-09-02T21:55:24Z</updated></entry><entry><title>sosreport: on the road to 3.1</title><link href="http://astokes.org/post/sosreport-on-the-road-to-31"/><id>http://astokes.org/post/sosreport-on-the-road-to-31</id><content type="html">&lt;p&gt;We&#39;ve got an aggressive feature list for the next milestone release and welcome any involvement from the community. A few of the big ticket items are the following:&lt;/p&gt;
+
+&lt;h2 id=&#34;toppriorityitems&#34;&gt;Top priority items&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Python 3.3 &lt;em&gt;and&lt;/em&gt; Python 2.7 support - yes we&#39;d like to keep supporting older python versions if possible :)&lt;/li&gt;
+&lt;li&gt;Sos object model archive (SOMA) - This feature is for allowing other applications interface with the data collected by sosreport.&lt;/li&gt;
+&lt;li&gt;DBUS integration - We&#39;d like to have this feature so that controlling the behavior of sosreport is easily integrated into other systems.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Additional &lt;a href=&#34;https://github.com/sosreport/sosreport/issues?labels=high&#38;amp;milestone=2&#38;amp;page=1&#38;amp;state=open&#34;&gt;high priority issues&lt;/a&gt; are also available.&lt;/p&gt;
+
+&lt;h3 id=&#34;otherimportantitemstonote:&#34;&gt;Other important items to note:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Plugins&lt;/em&gt; - As technologies evolve and new software rises we are always welcoming new plugins to capture the necessary data to aid in debugging those technologies. If you&#39;ve got something in mind its just a simple &lt;a href=&#34;https://github.com/sosreport/sosreport&#34;&gt;pull request&lt;/a&gt; away to get it on the right track for inclusion.&lt;/li&gt;
+&lt;li&gt;Tests - Our goal is to be at 100% (I think we&#39;re at about 69%) coverage with a wide range of unittests. So if you fancy quality assurance then this is an excellent opportunity for you :D&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;moreinfo&#34;&gt;More info&lt;/h3&gt;
+
+&lt;p&gt;For more information and other issues scheduled to be fixed for the next release visit &lt;a href=&#34;https://github.com/sosreport/sosreport/issues?milestone=2&#38;amp;state=open&#34;&gt;sosreport issues&lt;/a&gt;&lt;/p&gt;
+</content><updated>2013-08-23T18:17:58Z</updated></entry><entry><title>vimntu; easiest way to get up and running with vim</title><link href="http://astokes.org/post/vimntu-easiest-way-to-get-up-and-running-with-vim"/><id>http://astokes.org/post/vimntu-easiest-way-to-get-up-and-running-with-vim</id><content type="html">&lt;p&gt;I&#39;ve spent some time working on a &lt;a href=&#34;https://github.com/battlemidget/vimntu&#34;&gt;stupid simple script&lt;/a&gt; that would install latest snapshot of VIM along with &lt;a href=&#34;https://github.com/carlhuda/janus&#34;&gt;janus&lt;/a&gt; and my additional plugins. It&#39;s really easy to get started, to install simply run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ curl -L https://github.com/battlemidget/vimntu/raw/master/vimntu | perl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You get all the modifications from &lt;a href=&#34;https://github.com/carlhuda/janus&#34;&gt;janus&lt;/a&gt; in addition to an extensive set of plugins activated through pathogen that gives extensive support to most of the major programming languages.&lt;/p&gt;
+</content><updated>2013-08-20T20:14:34Z</updated></entry><entry><title>SOSreport now in Debian unstable(sid) and Ubuntu saucy</title><link href="http://astokes.org/post/sosreport-now-in-debian-unstablesid-and-ubuntu-saucy"/><id>http://astokes.org/post/sosreport-now-in-debian-unstablesid-and-ubuntu-saucy</id><content type="html">&lt;p&gt;&lt;a href=&#34;https://github.com/sosreport/sosreport&#34;&gt;sosreport&lt;/a&gt; v3.0 is now in &lt;strong&gt;&lt;em&gt;Debian Unstable(Sid)&lt;/em&gt;&lt;/strong&gt; and was synced
+this morning into &lt;strong&gt;&lt;em&gt;Saucy&lt;/em&gt;&lt;/strong&gt; (13.10). I&#39;ve created some &lt;a href=&#34;https://bugs.launchpad.net/raring-backports/+bug/1206118&#34;&gt;backport&lt;/a&gt; requests to
+hopefully have sosreport put into Precise, Quantal, and Raring.&lt;/p&gt;
+
+&lt;p&gt;Another goal of mine is to have sosreport included in the &lt;strong&gt;main&lt;/strong&gt;
+archive so I&#39;ve filed a &lt;a href=&#34;https://bugs.launchpad.net/ubuntu/+source/sosreport/+bug/1206106&#34;&gt;MIR&lt;/a&gt; request for that as well. If this is
+something that interests you please visit the &lt;a href=&#34;https://bugs.launchpad.net/ubuntu/+source/sosreport/+bug/1206106&#34;&gt;MIR&lt;/a&gt; and set to affects
+you. I would like to see this in &lt;strong&gt;main&lt;/strong&gt; in time for the next LTS
+release.&lt;/p&gt;
+
+&lt;p&gt;Development of &lt;a href=&#34;https://github.com/sosreport/sosreport&#34;&gt;sosreport&lt;/a&gt; is on-going and we encourage new
+contributions in any form, but, particularly interested in new plugins.
+We welcome you to fork the project and submit pull requests as this
+seems to be the easiest and most productive way to get code accepted
+into upstream.&lt;/p&gt;
+
+&lt;p&gt;Finally, I&#39;d like to thank those companies and its engineers who&#39;ve
+contributed to the growth of sosreport. These companies include but are
+not limited to Canonical Ltd, EMC Corporation, Rackspace US, Inc., and
+Red Hat, Inc. You may find a list of all contributors in
+&lt;strong&gt;/usr/share/doc/sosreport/AUTHORS&lt;/strong&gt;.&lt;/p&gt;
+</content><updated>2013-07-29T13:16:07Z</updated></entry><entry><title>Streamline your build system with vagrant + sbuild</title><link href="http://astokes.org/post/streamline-your-build-system-with-vagrant-sbuild"/><id>http://astokes.org/post/streamline-your-build-system-with-vagrant-sbuild</id><content type="html">&lt;p&gt;Remembering what to do in order to get your sbuild environment setup with deb
+caching and configuring Barry Warsaws repotools for those packages not in the
+archive can be a little tedious at times.&lt;/p&gt;
+
+&lt;p&gt;For me I hated upgrading my systems knowing I had to re-setup my sbuild
+environments.&lt;/p&gt;
+
+&lt;p&gt;In order to streamline this I created a project to help package builders take
+some of these boilerplate stuff out of the way and just create the schroot and
+start your build.&lt;/p&gt;
+
+&lt;p&gt;This vagrant project was modeled after &lt;a href=&#34;https://wiki.ubuntu.com/SimpleSbuild&#34;&gt;SbuildSimple&lt;/a&gt;. Please check there
+for additional information on local packages.&lt;/p&gt;
+
+&lt;p&gt;You can find the project at &lt;a href=&#34;https://github.com/battlemidget/vagrant-sbuild&#34;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;supports lxc and virtualbox&lt;/li&gt;
+&lt;li&gt;apt package caching for quicker builds&lt;/li&gt;
+&lt;li&gt;automatically set maxcpus available to sbuild&lt;/li&gt;
+&lt;li&gt;supports building packages against newer/custom local packages&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Using it is fairly simple:&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install virtualbox&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ sudo apt-get install virtualbox
+&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install &lt;a href=&#34;http://downloads.vagrantup.com/&#34;&gt;vagrant&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Install vagrant-sbuild&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ git clone git://github.com:battlemidget/vagrant-sbuild.git
+$ cd vagrant-sbuild
+$ git submodule init
+$ git submodule update
+&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://github.com/fgrehm/vagrant-lxc&#34;&gt;vagrant-lxc&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ vagrant plugin install vagrant-lxc
+&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Set some environment variables&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+export DEBEMAIL=Your Name &lt; hi2u@mail.com &gt;
+export DEBSIGN_KEY=123134
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;optional&#34;&gt;Optional&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://github.com/fgrehm/vagrant-cachier&#34;&gt;vagrant-cachier&lt;/a&gt; for improved performance&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ vagrant plugin install vagrant-cachier
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: I havent personally tested this as apt-cacher-ng is running for builds, however, for
+the provisioning itself it may be beneficial if you are doing a lot of provisioning. Make sure
+you read the &lt;strong&gt;Vagrantfile&lt;/strong&gt; and uncomment the section that enables the auto caching feature.&lt;/p&gt;
+
+&lt;h2 id=&#34;vagrantboxes&#34;&gt;Vagrant boxes&lt;/h2&gt;
+
+&lt;p&gt;A list of lxc supported vagrant boxes can be found at the &lt;a href=&#34;https://github.com/fgrehm/vagrant-lxc/wiki/Base-boxes&#34;&gt;Vagrant LXC wiki&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ vagrant up
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;createsbuildenvironments&#34;&gt;Create sbuild environments&lt;/h2&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ vagrant mk-sbuild --series saucy
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;performbuilds&#34;&gt;Perform builds&lt;/h2&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ vagrant sbuild --project saucy-amd64 --dsc scratch/PACKAGE\*.dsc
+&lt;/pre&gt;
+
+&lt;p&gt;If packages are required that are not in the archive you may place them in
+the &lt;strong&gt;repo/&lt;/strong&gt; directory and they will be included in any future builds.&lt;/p&gt;
+
+&lt;p&gt;Once complete the build packages should be in your &lt;strong&gt;scratch/&lt;/strong&gt; directory
+and not once did you have to ssh into your vagrant box :D&lt;/p&gt;
+
+&lt;h2 id=&#34;todos&#34;&gt;Todo&#39;s&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;setup vagrant multi-machine for each series&lt;/li&gt;
+&lt;li&gt;include a config.yaml file for setting your debian maintainer info and other
+necessities.&lt;/li&gt;
+&lt;/ul&gt;
+</content><updated>2013-07-18T13:03:17Z</updated></entry><entry><title>Juju end to end deployment: Apache2+SSL, Gunicorn, Django, Postgresql</title><link href="http://astokes.org/post/juju-end-to-end-deployment-apache2ssl-gunicorn-django-postgresql"/><id>http://astokes.org/post/juju-end-to-end-deployment-apache2ssl-gunicorn-django-postgresql</id><content type="html">&lt;p&gt;Goal of this document is to explain how
+&lt;a href=&#34;https://wiki.ubuntu.com/christopherarges&#34;&gt;Chris Arges&lt;/a&gt; and I managed
+to get Apache w/SSL proxy to gunicorn which is serving up a django
+application with postgresql as the database and everything be
+deployable through Juju.&lt;/p&gt;
+
+&lt;p&gt;As an added bonus I&#39;ll also show you how to utilize Launchpad.net&#39;s
+SSO to enable authentication to your web application.&lt;/p&gt;
+
+&lt;p&gt;I will also break this document up into 2 parts with the first part
+concentrating on configuring your django application for deployment
+and the other doing the actual bootstrapping and deployment. Make sure
+you read the document in its entirety since they rely on each other to
+properly work.&lt;/p&gt;
+
+&lt;h1 id=&#34;pre-requisites&#34;&gt;Pre-requisites&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu 12.04&lt;/li&gt;
+&lt;li&gt;Juju 0.7&lt;/li&gt;
+&lt;li&gt;You&#39;ll want to have an existing django project created which uses
+postgresql as the database backend. I won&#39;t go into details on setting
+that up since this focuses purely on deploying with Juju, but,
+&lt;a href=&#34;https://docs.djangoproject.com/en/1.4/intro/install/&#34;&gt;Django&lt;/a&gt; documentation is excellent in getting up and running.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The rest of the necessary bits are handled by Juju.&lt;/p&gt;
+
+&lt;h1 id=&#34;theenvironment&#34;&gt;The environment&lt;/h1&gt;
+
+&lt;p&gt;In this document I use LXC as the containers for juju deployment. You
+could easily use AWS or any other supported cloud technologies. The
+directory layout for this tutorial looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  - /home/adam/deployer
+    - djangoapp/
+      - settings.py
+      - manage.py
+      - urls.py
+      - mydjangoapp/
+        - models.py
+        - views.py
+        - urls.py
+    - charms/precise/django-deploy-charm
+      - hooks/
+      - files/
+      - templates/
+      - config.yaml
+      - metadata.yaml
+      - README
+      - revision
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;strong&gt;djangoapp&lt;/strong&gt; directory houses my django application and
+&lt;strong&gt;charms/precise/django-deploy-charm&lt;/strong&gt; is my local charm that handles
+all of the Juju hooks necessary to get my environment up.&lt;/p&gt;
+
+&lt;h1 id=&#34;partuno:configuringyourdjangoapplication&#34;&gt;PART UNO: Configuring your Django application&lt;/h1&gt;
+
+&lt;h2 id=&#34;enableimportingofdatabaseoverridesfromjuju&#34;&gt;Enable importing of database overrides from Juju&lt;/h2&gt;
+
+&lt;p&gt;Edit &lt;strong&gt;settings.py&lt;/strong&gt; and append the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  # Import juju_settings.py for DB overrides in juju environments
+  try:
+      from djangoapp.juju_settings import *
+  except ImportError:
+      pass
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will override the default database so you can choose to ignore the current databases stanza in
+the &lt;strong&gt;settings.py&lt;/strong&gt; file.&lt;/p&gt;
+
+&lt;h2 id=&#34;enabledjangotoproperlyprefixurlsifcomingfromansslreferer&#34;&gt;Enable Django to properly prefix URLS if coming from an SSL Referer&lt;/h2&gt;
+
+&lt;p&gt;This is the first part of telling Django to expect requests from the Apache reverse proxy over HTTPS.&lt;/p&gt;
+
+&lt;p&gt;Edit &lt;strong&gt;settings.py&lt;/strong&gt; and add the following somewhere after the python import statements. (location of this
+is probably optional, but, im cautious so we add it at the beginning)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  # Make sure that if we have an SSL referer in the headers that DJANGO
+  # prefixes all urls with HTTPS
+
+  SECURE_PROXY_SSL_HEADER = (&#39;HTTP_X_FORWARDED_PROTO&#39;, &#39;https&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;rememberthataddedbonusgoaheadanddefinethenecessarylaunchpad.netbits&#34;&gt;Remember that added bonus? Go ahead and define the necessary Launchpad.net bits&lt;/h2&gt;
+
+&lt;p&gt;For Django to work with Launchpad&#39;s SSO service you&#39;ll want to make sure that &lt;strong&gt;django-openid-auth&lt;/strong&gt; is
+installed. This will be handled by Juju and I&#39;ll show you that in &lt;strong&gt;PART DOS&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Again edit &lt;strong&gt;settings.py&lt;/strong&gt; to include the following OpenID configuration items.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  ALLOWED_EXTERNAL_OPENID_REDIRECT_DOMAINS = [&#39;lvh.me&#39;, &#39;localhost&#39;, &#39;yourfqdn.com&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For development purposes I usually use lvh.me to associate a fqdn with my loopback.&lt;/p&gt;
+
+&lt;p&gt;Add the authorization backend to the &lt;strong&gt;AUTHENTICATION_BACKENDS&lt;/strong&gt; tuple:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  # Add support for django-openid-auth
+  AUTHENTICATION_BACKENDS = (
+      &#39;django_openid_auth.auth.OpenIDBackend&#39;,
+      &#39;django.contrib.auth.backends.ModelBackend&#39;,
+  )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add some helpful options to associating Launchpad accounts with user accounts in your django app.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  OPENID_CREATE_USERS = True
+  OPENID_UPDATE_DETAILS_FROM_SREG = True
+  OPENID_SSO_SERVER_URL = &#39;https://login.launchpad.net/&#39;
+  OPENID_USE_AS_ADMIN_LOGIN = True
+
+  # The launchpad teams and staff_teams  were manually created at launchpad.net
+  OPENID_LAUNCHPAD_TEAMS_REQUIRED = [
+      &#39;debugmonkeys&#39;,
+      &#39;canonical&#39;,
+  ]
+  OPENID_LAUNCHPAD_STAFF_TEAMS = (
+      &#39;debugmonkeys&#39;,
+  )
+  OPENID_STRICT_USERNAMES = True
+  OPENID_USE_EMAIL_FOR_USERNAME = True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Set the &lt;strong&gt;LOGIN_URL&lt;/strong&gt; path to where redirected users will go to login.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  LOGIN_URL = &#39;/openid/login/&#39;
+  LOGIN_REDIRECT_URL = &#39;/&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;summaryofpartuno&#34;&gt;Summary of Part UNO&lt;/h2&gt;
+
+&lt;p&gt;This configuration will have your django application prepped for juju deployment with the ability to authenticate
+against launchpad.net and automatically associate the postgres database settings.&lt;/p&gt;
+
+&lt;h1 id=&#34;partdos:configureanddeployyourjujucharm&#34;&gt;PART DOS: Configure and deploy your juju charm&lt;/h1&gt;
+
+&lt;h2 id=&#34;definingyourconfigandmetadataoptions&#34;&gt;Defining your config and metadata options&lt;/h2&gt;
+
+&lt;p&gt;In &lt;strong&gt;config.yaml&lt;/strong&gt; youll want to make sure the following options are defined and set:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  options:
+    requirements:
+      type: string
+      default: &#34;requirements.txt&#34;
+      description: |
+        The relative path to the requirement file. Note that the charm
+        won&#39;t manually upgrade packages defined in this file.
+    instance_type:
+      default: &#34;staging&#34;
+      type: string
+      description: |
+        Selects if we&#39;re deploying to production or development.
+        production == deploying to prodstack
+        staging == local development (lxc/private cloud)
+    user_code_runner:
+        default: &#34;webguy&#34;
+        type: string
+        description: The user that runs the code
+    group_code_runner:
+        default: &#34;webguy&#34;
+        type: string
+        description: The group that runs the code
+    user_code_owner:
+        default: &#34;webops_deploy&#34;
+        type: string
+        description: The user that owns the code
+    group_code_owner:
+        default: &#34;webops_deploy&#34;
+        type: string
+        description: The group that owns the code
+    app_payload:
+      type: string
+      description: |
+        Filename to use to extract the actual django application.
+        This file must be in the files/ directory.
+      default: &#34;djangoapp.tar.bz2&#34;
+    web_app_admin:
+      type: string
+      description: Web application admin email
+      default: &#34;webguy@example.com&#34;
+    wsgi_wsgi_file:
+      type: string
+      description: &#34;The name of the WSGI application.&#34;
+      default: &#34;wsgi&#34;
+    wsgi_worker_class:
+      type: string
+      default: &#34;gevent&#34;
+      description: &#34;Gunicorn workers type. (eventlet|gevent|tornado)&#34;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the &lt;strong&gt;metadata.yaml&lt;/strong&gt; file we need to define the relation information, create that file with the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  name: django-deploy-charm
+  maintainer: [Adam Stokes &#38;lt;adam.stokes@ubuntu.com&#38;gt;]
+  summary: My Django project
+  description: |
+    Django website for My Django App
+  provides:
+    website:
+      interface: http
+    wsgi:
+      interface: wsgi
+      scope: container
+  requires:
+    db:
+      interface: pgsql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;strong&gt;revision&lt;/strong&gt; file keeps a positive integer to let Juju know that a new revision with changes are available.
+It is also recommended to add a &lt;strong&gt;README&lt;/strong&gt; laying out the juju deploy steps for getting your charm up and running.&lt;/p&gt;
+
+&lt;h2 id=&#34;writeyourcharmhooks&#34;&gt;Write your charm hooks&lt;/h2&gt;
+
+&lt;p&gt;This is where the magic happens, all charm hooks will reside in the &lt;strong&gt;hooks&lt;/strong&gt; directory and should be executable.&lt;/p&gt;
+
+&lt;h2 id=&#34;acommonincludefile&#34;&gt;A common include file&lt;/h2&gt;
+
+&lt;p&gt;Rather than repeating the defining of variables over and over we&#39;ll just source it from a common include file. Create
+a file called &lt;strong&gt;common.sh&lt;/strong&gt; and add the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  #!/bin/bash
+
+  UNIT_NAME=$(echo $JUJU_UNIT_NAME | cut -d/ -f1)
+  UNIT_DIR=/srv/${UNIT_NAME}
+
+  DJANGO_APP_PAYLOAD=$(config-get app_payload)
+  INSTANCE_TYPE=$(config-get instance_type)
+
+  USER_CODE_RUNNER=$(config-get user_code_runner)
+  GROUP_CODE_RUNNER=$(config-get group_code_runner)
+  USER_CODE_OWNER=$(config-get user_code_owner)
+  GROUP_CODE_OWNER=$(config-get group_code_owner)
+
+  function ctrl_service {
+      # Check if there is an upstart or sysvinit service defined and issue the
+      # requested command if there is. This is used to control services in a
+      # friendly way when errexit is on.
+      service_name=$1
+      service_cmd=$2
+      ( service --status-all 2&#38;gt;1 | grep -w $service_name ) &#38;amp;&#38;amp; service $service_name $service_cmd
+      ( initctl list 2&#38;gt;1 | grep -w $service_name ) &#38;amp;&#38;amp; service $service_name $service_cmd
+      return 0
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;the__install__hook&#34;&gt;The &lt;strong&gt;install&lt;/strong&gt; hook&lt;/h2&gt;
+
+&lt;p&gt;This hook handles the extracting, package installation, and permission settings.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  #!/bin/bash
+
+  source ${CHARM_DIR}/hooks/common.sh
+
+  juju-log &#34;Jujuing ${UNIT_NAME}&#34;
+
+  ###############################################################################
+  # Directory Structure
+  ###############################################################################
+  function inflate {
+      juju-log &#34;Creating directory structure&#34;
+      mkdir -p ${UNIT_DIR}
+  }
+
+  ###############################################################################
+  #  User / Group permissions
+  ###############################################################################
+  function set_perms {
+      juju-log &#34;Setting permissions&#34;
+
+      getent group ${GROUP_CODE_RUNNER} ${GROUP_CODE_OWNER} &#38;gt;&#38;gt; /dev/null
+      if [[ $? -eq 2 ]]; then
+          addgroup --quiet $GROUP_CODE_OWNER
+          addgroup --quiet $GROUP_CODE_RUNNER
+      fi
+
+      # Check if the users already exists and create a new user if it doesn&#39;t
+      if [[ ! `users` =~ ${USER_CODE_OWNER} ]]; then
+    adduser --quiet --system --disabled-password --ingroup \
+              ${GROUP_CODE_OWNER} ${USER_CODE_OWNER}
+      fi
+      if [[ ! `users` =~ ${USER_CODE_RUNNER} ]]; then
+    adduser --quiet --system --disabled-password --ingroup \
+              ${GROUP_CODE_RUNNER} ${USER_CODE_RUNNER}
+      fi
+
+      chown -R $USER_CODE_OWNER:$GROUP_CODE_OWNER ${UNIT_DIR}
+
+      usermod -G www-data ${GROUP_CODE_RUNNER}
+
+  }
+
+  ###############################################################################
+  # Project Install
+  ###############################################################################
+  function app_install {
+      tar -xf ${CHARM_DIR}/files/${DJANGO_APP_PAYLOAD} -C ${UNIT_DIR}
+
+      juju-log &#34;Installing required packages.&#34;
+      # Additional supporting packages
+      /usr/bin/apt-add-repository -y ppa:gunicorn/ppa
+
+      # Common packages between instances
+      common_pkgs=&#34;python-pip python-dev build-essential libpq-dev python-django python-dateutil python-psycopg2 python-jinja2 pwgen ssl-cert gunicorn&#34;
+      # Silence apt-get
+      export DEBIAN_FRONTEND=noninteractive
+      REQUIREMENTS=$(config-get requirements)
+      if [[ ${INSTANCE_TYPE} == &#39;production&#39; ]]; then
+    apt-get -qq update
+
+    # Install required packages
+    apt-get -qq install -y python-amqplib python-anyjson \
+        python-bzrlib python-celery python-cherrypy \
+        python-django-celery python-django-openid-auth \
+        python-django-south python-launchpadlib python-oauth python-openid \
+        python-psycopg2 python-requests-oauthlib python-urllib3 python-salesforce \
+        python-cheetah ${common_pkgs}
+      else
+    apt-get -qq update
+    apt-get -qq install -y ${common_pkgs}
+    pip install -q -r ${UNIT_DIR}/${REQUIREMENTS} || true
+      fi
+  }
+
+  ###############################################################################
+  # MAIN
+  # Steps
+  # -----
+  # 1) inflate - build directory stucture
+  # 2) app_install - install bits
+  # 3) set_perms - finalizes permission settings
+  ###############################################################################
+  inflate
+  app_install
+  set_perms
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One thing to notice in the &lt;strong&gt;app_install&lt;/strong&gt; function is that we are extracting our django application from within
+the &lt;strong&gt;files/&lt;/strong&gt; directory. In order to make this work you&#39;ll want to manually tar up your django application and place it
+into that &lt;strong&gt;files&lt;/strong&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  # Make sure we are a level above the djangoapp directory
+  $ cd /home/adam/deployer
+  $ tar cjf charms/precise/seg-dashboard/files/djangoapp.tar.bz2 -C djangoapp .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;the__config-changed__hook&#34;&gt;The &lt;strong&gt;config-changed&lt;/strong&gt; hook&lt;/h2&gt;
+
+&lt;p&gt;This handles the configuring and populating of the django application. Here we are just concerned with
+symlinking the static assets from the django application.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  ###############################################################################
+  # WEB Application Config
+  # 1) Setup django application specific directory
+  # 2) Symlinks admin media directory
+  ###############################################################################
+  # 1)
+  SETTINGS_PY=&#34;${UNIT_DIR}/settings.py&#34;
+
+  # 2)
+  PYTHON_DJANGO_LIB=`python -c &#34;import django; print(django.__path__[0])&#34;`
+  mkdir -p /var/www/static
+  if [ ! -L /var/www/static/admin ]; then
+      ln -s ${PYTHON_DJANGO_LIB}/contrib/admin/static/admin /var/www/static/admin
+  fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;the__db-relation-changed__hook&#34;&gt;The &lt;strong&gt;db-relation-changed&lt;/strong&gt; hook&lt;/h2&gt;
+
+&lt;p&gt;This hook is where we define our Postgresql database settings to be included by the django application.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  #!/bin/bash
+
+  # Update the juju_settings.py with the new database credentials
+  source ${CHARM_DIR}/hooks/common.sh
+
+  ###############################################################################
+  # Export Database settings
+  ###############################################################################
+  export DBHOST=`relation-get host`
+  export DBNAME=`relation-get database`
+  export DBUSER=`relation-get user`
+  export DBPASSWD=`relation-get password`
+
+  # All values are set together, so checking on a single value is enough
+  # If $db_user is not set, DB is still setting itself up, we exit awaiting 
+  # next run.
+  [ -z &#34;$DBUSER&#34; ] &#38;amp;&#38;amp; exit 0
+
+  cheetah fill --env -p templates/juju_settings.tmpl \
+      &#38;gt; ${UNIT_DIR}/juju_settings.py
+
+  # Setup database
+  python ${UNIT_DIR}/manage.py syncdb --noinput
+
+  # Create admin fixture
+  cheetah compile --env -p templates/juju_fixtures.tmpl \
+      &#38;gt; templates/juju_fixtures.py
+  python templates/juju_fixtures.py \
+      &#38;gt; ${UNIT_DIR}/juju_fixtures.json
+
+  python ${UNIT_DIR}/manage.py loaddata ./juju_fixtures.json
+
+  juju-log &#34;Updating database(${DBNAME}) credentials and importing fixtures&#34;
+
+  ctrl_service gunicorn restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see we are processing a few templates to import into the django settings and load an admin
+fixture into the database.&lt;/p&gt;
+
+&lt;h3 id=&#34;the__juju_settings__file&#34;&gt;The &lt;strong&gt;juju_settings&lt;/strong&gt; file&lt;/h3&gt;
+
+&lt;p&gt;This is the database configuration and should reside in the &lt;strong&gt;templates&lt;/strong&gt; directory. Edit &lt;strong&gt;juju_settings.tmpl&lt;/strong&gt;
+and populate with the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  # Generated by db-relation-changed hook
+
+  # Pull in the project&#39;s default settings
+  from djangoapp.settings import *
+
+  # Overrite the database settings
+  DATABASES[&#39;default&#39;][&#39;ENGINE&#39;] = &#39;django.db.backends.postgresql_psycopg2&#39;
+  DATABASES[&#39;default&#39;][&#39;HOST&#39;] = &#39;${DBHOST}&#39;
+  DATABASES[&#39;default&#39;][&#39;NAME&#39;] = &#39;${DBNAME}&#39;
+  DATABASES[&#39;default&#39;][&#39;USER&#39;] = &#39;${DBUSER}&#39;
+  DATABASES[&#39;default&#39;][&#39;PASSWORD&#39;] = &#39;${DBPASSWD}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;the__juju_fixtures__file&#34;&gt;The &lt;strong&gt;juju_fixtures&lt;/strong&gt; file&lt;/h3&gt;
+
+&lt;p&gt;Edit &lt;strong&gt;juju_fixtures.tmpl&lt;/strong&gt; and add the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &#38;lt;%
+  import json
+  from subprocess import Popen, PIPE
+
+  def quickrun(cmd):
+      temp = Popen(cmd, stdout=PIPE).communicate()[0]
+      return temp.rstrip()
+
+  adminpasswd = quickrun([&#39;pwgen&#39;, &#39;-s&#39;, &#39;64&#39;, &#39;1&#39;])
+  timestamp = quickrun([&#39;date&#39;, &#39;+%F %R&#39;])
+
+  fixture = { &#34;pk&#34; : 1,
+              &#34;model&#34; : &#34;auth.user&#34;,
+              &#34;fields&#34; : { &#34;username&#34; : &#34;admin&#34;,
+                           &#34;password&#34; : adminpasswd,
+                           &#34;email&#34; : &#34;&#34;,
+                           &#34;first_name&#34; : &#34;&#34;,
+                           &#34;last_name&#34; : &#34;&#34;,
+                           &#34;is_active&#34; : True,
+                           &#34;is_superuser&#34; : True,
+                           &#34;is_staff&#34; : True,
+                           &#34;last_login&#34; : &#34;now&#34;,
+                           &#34;groups&#34; : [],
+                           &#34;user_permissions&#34; : [],
+                           &#34;date_joined&#34; : timestamp
+                           }
+              }
+
+  print json.dumps(fixture)
+  %&#38;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;the__website-relation-joined__and__website-relation-changed__&#34;&gt;The &lt;strong&gt;website-relation-joined&lt;/strong&gt; and &lt;strong&gt;website-relation-changed&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;The changed hook is just a symlink to &lt;strong&gt;website-relation-joined&lt;/strong&gt; in this case. Edit your &lt;strong&gt;website-relation-joined&lt;/strong&gt; file
+and add the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  #!/bin/bash
+
+  unit_name=${JUJU_UNIT_NAME//\//-}
+
+  relation-set port=8080 hostname=`unit-get private-address`
+  relation-set all_services=&#34;
+    - {service_name: gunicorn, service_port: 8080}
+  &#34;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We are making sure that apache will have access to the private IP and PORT of the gunicorn application server.&lt;/p&gt;
+
+&lt;h2 id=&#34;the__wsgi-relation-changed__and__wsgi-relation-joined__&#34;&gt;The &lt;strong&gt;wsgi-relation-changed&lt;/strong&gt; and &lt;strong&gt;wsgi-relation-joined&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;Again the changed hook is symlinked to the joined hook. Edit &lt;strong&gt;wsgi-relation-joined&lt;/strong&gt; and add the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  #!/bin/bash
+
+  UNIT_NAME=`echo $JUJU_UNIT_NAME | cut -d/ -f1`
+
+  relation-set working_dir=&#34;/srv/${UNIT_NAME}/&#34;
+  relation-set django_settings=&#34;${UNIT_DIR}/settings.py&#34;
+  relation-set python_path=`python -c &#34;import django; print(django.__path__[0])&#34;`
+
+  variables=&#34;wsgi_wsgi_file wsgi_workers wsgi_worker_class wsgi_worker_connections wsgi_max_requests wsgi_timeout wsgi_backlog wsgi_keep_alive wsgi_extra wsgi_user wsgi_group wsgi_umask wsgi_log_file wsgi_log_level wsgi_access_logfile wsgi_access_logformat port&#34;
+
+  declare -A VAR
+  for v in $variables;do
+    VAR[$v]=$(config-get $v)
+    if [ ! -z &#34;${VAR[$v]}&#34; ] ; then
+      relation-set &#34;$v=${VAR[$v]}&#34;
+    fi
+  done
+
+  juju-log &#34;Set relation variables: ${VAR[@]}&#34;
+
+  service gunicorn restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here the &lt;strong&gt;gunicorn&lt;/strong&gt; charm expects a &lt;strong&gt;working_dir&lt;/strong&gt; and a &lt;strong&gt;wsgi&lt;/strong&gt; interface. These are set with the above relations and
+also a loop is provided if any other gunicorn options were to be overriden from the defaults provided in that charm.&lt;/p&gt;
+
+&lt;h2 id=&#34;the__apache_vhost__template&#34;&gt;The &lt;strong&gt;apache_vhost&lt;/strong&gt; template&lt;/h2&gt;
+
+&lt;p&gt;The apache2 virtualhost stanza that will ultimately provide the outside world access to your django application. Edit &lt;strong&gt;apache_vhost.tmpl&lt;/strong&gt; and add the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  # Managed by juju
+    &#38;lt; VirtualHost *:80 &#38;gt;
+      ServerName      {{ servername }}
+      Redirect permanent / https://{{ servername }}/
+    &#38;lt; /VirtualHost &#38;gt;
+
+    &#38;lt; VirtualHost {{ servername }}:443 &#38;gt;
+      ServerName      {{ servername }}
+      ServerAdmin     admin@example.com
+
+      CustomLog       /var/log/djangoapp-custom.log combined
+      ErrorLog        /var/log/djangoapp-error.log
+
+
+      SSLEngine on
+      SSLCertificateFile /etc/ssl/certs/ssl-cert-cts.pem
+      SSLCertificateKeyFile /etc/ssl/private/ssl-cert-cts.key
+
+      RequestHeader set X-FORWARDED-SSL &#34;on&#34;
+
+      # This ensures django is seeing the https protocol
+      # and prefixing all URLS with https
+
+      RequestHeader set X-FORWARDED_PROTO &#34;https&#34;
+
+      ProxyRequests off
+      ProxyPreserveHost on
+      &#38;lt;Proxy *&#38;gt;
+          Order Allow,Deny
+          Allow from All
+      &#38;lt;/Proxy&#38;gt;
+
+      ProxyPass / http://{{ djangoapp_gunicorn }}/
+      ProxyPassReverse / http://{{ djangoapp_gunicorn }}/
+    &#38;lt; /VirtualHost &#38;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The items such as SSL, Header modification, and Proxy support are loaded through the apache configuration charm which is discussed below.&lt;/p&gt;
+
+&lt;h2 id=&#34;summaryofthehooks&#34;&gt;Summary of the hooks&lt;/h2&gt;
+
+&lt;p&gt;These hooks provide the groundwork for making the rest of the deployment possible. I realize some of the templates aren&#39;t making sense at the moment but read further to link the missing pieces.&lt;/p&gt;
+
+&lt;h2 id=&#34;thejujuenvironmentsetup&#34;&gt;The Juju environment setup&lt;/h2&gt;
+
+&lt;p&gt;Once the hooks are done and youve compressed a tarball of your django application and have it sitting in your &lt;strong&gt;files/&lt;/strong&gt; directory it is time to bootstrap juju and get on our way to deploying. I am assuming no pre-existing juju setup exists. In the case that you have Juju defined for other things then skip the bootstrap.&lt;/p&gt;
+
+&lt;h2 id=&#34;bootstrapyourjujuenvironment&#34;&gt;Bootstrap your Juju environment&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ juju bootstrap
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will create a sample &lt;strong&gt;~/.juju/environments.yaml&lt;/strong&gt; file that you can alter. Mine looks like the following
+for an LXC setup.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  environments:
+    sample:
+      type: local
+      control-bucket: juju-364887954bed48b590b9b6bd112a842a
+      admin-secret: fa8d276204ab4be4b3666cc5afe3bd21
+      default-series: precise
+      ssl-hostname-verification: true
+      data-dir: /home/adam/jujuimgs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;deploytheapplicationcharm&#34;&gt;Deploy the application charm&lt;/h2&gt;
+
+&lt;p&gt;From your toplevel directory, in my case &lt;strong&gt;/home/adam/deployer&lt;/strong&gt; execute the following to get the django application deployed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ juju deploy --repository ./charms local:django-deploy-charm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;deploytheapplicationservergunicornandsetuptherelationbetweentheapplicationandapplicationserver&#34;&gt;Deploy the application server (gunicorn) and setup the relation between the application and application server&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ juju deploy gunicorn
+  $ juju add-relation gunicorn django-deploy-charm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;deployapache2andaddtherelationtotheapplicationforreverseproxyingtowork&#34;&gt;Deploy apache2 and add the relation to the application for reverse proxying to work&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ juju deploy apache2
+  $ juju add-relation apache2:reverseproxy django-deploy-charm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;configuretheapache2charmtoloadourvirtualhostandautogeneratethenecessarycertificatesforsslsupport&#34;&gt;Configure the Apache2 charm to load our Virtual Host and auto generate the necessary certificates for SSL support&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ juju set apache2 &#34;vhost_https_template=$(base64 &#38;lt; templates/apache_vhost.tmpl)&#34;
+  $ juju set apache2 &#34;enable_modules=ssl proxy proxy_http proxy_connect rewrite headers&#34;
+  $ juju set apache2 &#34;ssl_keylocation=ssl-cert-cts.key&#34;
+  $ juju set apache2 &#34;ssl_certlocation=ssl-cert-cts.pem&#34;
+  $ juju set apache2 &#34;ssl_cert=SELFSIGNED&#34;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All of these options are explained in the README of the &lt;strong&gt;apache2&lt;/strong&gt; charm. But what this does is basically load a jinja2 supported template, enables the necessary modules in apache for proxy, ssl, and header modification support. Since we are doing a &lt;strong&gt;SELFSIGNED&lt;/strong&gt; certificate for development and testing we set the filenames of the certificate and have the &lt;strong&gt;apache2&lt;/strong&gt; charm generate the certificates automatically.&lt;/p&gt;
+
+&lt;h2 id=&#34;deploypostgresqlandsetupthedatabaserelationtoourapplication&#34;&gt;Deploy postgresql and set up the database relation to our application&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ juju deploy postgresql
+  $ juju add-relation django-deploy-charm:db postgresql:db
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;exposeourapache2servicetotheworld&#34;&gt;Expose our Apache2 service to the world&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ juju expose apache2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;tada&#34;&gt;Tada&lt;/h1&gt;
+
+&lt;p&gt;After about 5 or 10 minutes all the services should be deployed and you can get the public facing IP of the apache server by the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ juju status apache2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For completeness this is what a fully deployed juju stack should look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  machines:
+    0:
+      agent-state: running
+      dns-name: localhost
+      instance-id: local
+      instance-state: running
+  services:
+    apache2:
+      charm: cs:precise/apache2-11
+      exposed: true
+      relations:
+        reverseproxy:
+        - django-deploy-charm
+      units:
+        apache2/0:
+          agent-state: started
+          machine: 0
+          open-ports:
+          - 80/tcp
+          - 443/tcp
+          public-address: 10.0.3.218
+    gunicorn:
+      charm: cs:precise/gunicorn-7
+      relations:
+        wsgi-file:
+        - django-deploy-charm
+      subordinate: true
+      subordinate-to:
+      - django-deploy-charm
+    postgresql:
+      charm: cs:precise/postgresql-30
+      exposed: false
+      relations:
+        replication:
+        - postgresql
+      units:
+        postgresql/0:
+          agent-state: started
+          machine: 0
+          public-address: 10.0.3.119
+    django-deploy-charm:
+      charm: local:precise/django-deploy-charm-8
+      relations:
+        website:
+        - apache2
+        wsgi:
+        - gunicorn
+      units:
+        django-deploy-charm/2:
+          agent-state: started
+          machine: 0
+          public-address: 10.0.3.208
+          relations:
+            wsgi:
+            - gunicorn
+          subordinates:
+            gunicorn/2:
+              agent-state: started
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case if I go to &lt;strong&gt;https://10.0.3.218&lt;/strong&gt; it should bring up your custom django application. If youve setup authentication with Launchpad.net like in the above example visiting &lt;strong&gt;https://10.0.3.218/openid/login&lt;/strong&gt; should redirect your to Launchpad&#39;s SSO service and allow you authenticate and redirect back to your django application.&lt;/p&gt;
+
+&lt;h2 id=&#34;contributorswelcomed&#34;&gt;Contributors welcomed!&lt;/h2&gt;
+
+&lt;p&gt;If you would like to checkout the source for the charm itself you can see it on &lt;a href=&#34;https://github.com/battlemidget/juju-apache-gunicorn-django.git&#34;&gt;Github&lt;/a&gt;. Would love to make this charm general enough to give people a great starting point for setting up their environments. If modifications to the document are needed please post in the comments section and Ill get those implemented.&lt;/p&gt;
+
+&lt;h2 id=&#34;thingsnotdone&#34;&gt;Things not done&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This tutorial doesn&#39;t cover how to setup static files as the static files live on the application server and not the apache server itself.&lt;/li&gt;
+&lt;li&gt;I am aware there is a &lt;strong&gt;django&lt;/strong&gt; charm that could easily be used in place of taring up your django application, it would be worth looking into that charm to further your deployment options.&lt;/li&gt;
+&lt;li&gt;Not tested with Golang version of Juju since LXC support is not available &lt;strong&gt;yet&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content><updated>2013-07-14T22:02:02Z</updated></entry><entry><title>New Mojolicious plugin - Disqus::Tiny</title><link href="http://astokes.org/post/new-mojolicious-plugin---disqustiny"/><id>http://astokes.org/post/new-mojolicious-plugin---disqustiny</id><content type="html">&lt;p&gt;Another small plugin for easing inclusion of socially enabled software. This
+plugin only concentrates on including the necessary javascript code to get
+comments enabled on your blog or web app.
+&lt;a href=&#34;https://metacpan.org/module/Mojolicious::Plugin::Disqus&#34;&gt;Mojolicious::Plugin::Disqus&lt;/a&gt; gives you more control over the api if you need
+more options.&lt;/p&gt;
+
+&lt;p&gt;A quick example on setting up your disqus forum on a mojolicious app:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  #!/usr/bin/env perl
+  use Mojolicious::Lite;
+
+  plugin &#39;Disqus::Tiny&#39;;
+
+  get &#39;/&#39; =&#38;gt; sub {
+    my $self = shift;
+    $self-&#38;gt;render(&#39;index&#39;);
+  };
+
+  app-&#38;gt;start;
+  __DATA__
+
+  @@ index.html.ep
+  Welcome to the Mojolicious real-time web framework!
+
+  &#38;lt;%= disqus_inc &#39;astokes&#39; %&#38;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can find the module on &lt;a href=&#34;https://metacpan.org/module/Mojolicious::Plugin::Disqus::Tiny&#34;&gt;cpan&lt;/a&gt; and code repository on &lt;a href=&#34;https://github.com/battlemidget/Mojolicious-Plugin-Disqus-Tiny&#34;&gt;github&lt;/a&gt;.&lt;/p&gt;
+</content><updated>2013-07-01T14:11:09Z</updated></entry><entry><title>New Mojolicious plugin: Google Analytics</title><link href="http://astokes.org/post/new-mojolicious-plugin-google-analytics"/><id>http://astokes.org/post/new-mojolicious-plugin-google-analytics</id><content type="html">&lt;p&gt;A new plugin up on cpan for making it easy to add your Google Analytics
+tracking code. &lt;/p&gt;
+
+&lt;p&gt;To get started just include the plugin in your Mojolicious web application and
+use the builtin helper.&lt;/p&gt;
+
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ cpanm Mojolicious::Plugin::GoogleAnalytics
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;  # Mojolicious
+  $self-&#38;gt;plugin(&#39;GoogleAnalytics&#39;);
+
+  # Mojolicious::Lite
+  plugin &#39;GoogleAnalytics&#39;;
+
+  # In your layout template just before closing head tag
+  &#38;lt;%= analytics_inc &#39;UA-32432-1&#39; %&#38;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hopefully, that&#39;ll save some few extra lines of typing :D&lt;/p&gt;
+</content><updated>2013-06-22T02:33:32Z</updated></entry><entry><title>Get up and running with skryf a perl blog engine</title><link href="http://astokes.org/post/get-up-and-running-with-skryf-a-perl-blog-engine"/><id>http://astokes.org/post/get-up-and-running-with-skryf-a-perl-blog-engine</id><content type="html">&lt;p&gt;Another blog engine utilizing Mojolicious, Markdown, Hypnotoad, Rex, and
+Ubic for a more streamlined deployable approach.&lt;/p&gt;
+
+&lt;h2 id=&#34;prereqs&#34;&gt;PREREQS&lt;/h2&gt;
+
+&lt;p&gt;I like &lt;a href=&#34;http://perlbrew.pl&#34;&gt;perlbrew&lt;/a&gt;, but, whatever you&#39;re comfortable with. I
+won&#39;t judge.&lt;/p&gt;
+
+&lt;h2 id=&#34;installationsource&#34;&gt;INSTALLATION (SOURCE)&lt;/h2&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ git clone git://github.com/battlemidget/App-skryf.git
+$ cpanm --installdeps .
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;SETUP&lt;/h2&gt;
+
+&lt;p&gt;By default &lt;strong&gt;skryf&lt;/strong&gt; will look in &lt;em&gt;dist_dir&lt;/em&gt; for templates and media. To
+override that make sure &lt;strong&gt;~/.skryf.conf&lt;/strong&gt; points to the locations of your
+templates, posts, and media. For example, this is a simple directory
+structure for managing your blog.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ mkdir -p ~/blog/{posts,templates,public}
+&lt;/pre&gt;
+
+&lt;p&gt;Another useful reference would be to check out &lt;a href=&#34;https://github.com/battlemidget/stokes-blog&#34;&gt;my git
+repo&lt;/a&gt; that hosts this
+site.&lt;/p&gt;
+
+&lt;p&gt;Edit &lt;strong&gt;~/.skryf.conf&lt;/strong&gt; to reflect those directories in &lt;em&gt;media_directory&lt;/em&gt;,
+&lt;em&gt;post_directory&lt;/em&gt;, and &lt;em&gt;template_directory&lt;/em&gt;.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+## Available vars:
+##   %bindir%   (path to executable&#39;s dir)
+##   %homedir%  (current $HOME)
+post_directory     =&gt; &#39;%homedir%/blog/posts&#39;,
+template_directory =&gt; &#39;%homedir%/blog/templates&#39;,
+media_directory    =&gt; &#39;%homedir%/blog/public&#39;,
+&lt;/pre&gt;
+
+&lt;p&gt;You&#39;ll want to make sure that files exist that reflect the template
+configuration options.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+post_template  =&gt; &#39;post&#39;,
+index_template =&gt; &#39;index&#39;,
+about_template =&gt; &#39;about&#39;,
+css_template   =&gt; &#39;style&#39;,
+&lt;/pre&gt;
+
+&lt;p&gt;So &lt;strong&gt;~/blog/templates/{post.html.ep,index.html.ep,about.html.ep}&lt;/strong&gt; and
+&lt;strong&gt;~/blog/public/style.css&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;deploy&#34;&gt;DEPLOY&lt;/h2&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ export BLOGUSER=username
+$ export BLOGSERVER=example.com
+
+If perlbrew is installed Rex will autoload that environment to use remotely.
+Otherwise more tinkering is required to handle the perl environment remotely.
+$ rex deploy
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;rundevelopment&#34;&gt;RUN (Development)&lt;/h2&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ morbo `which skryf`
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;runproduction&#34;&gt;RUN (Production)&lt;/h2&gt;
+
+&lt;p&gt;I use Ubic to manage the process&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+use Ubic::Service::SimpleDaemon;
+my $service = Ubic::Service::SimpleDaemon-&gt;new(
+ bin =&gt; &#34;hypnotoad -f `which skryf`&#34;,
+ cwd =&gt; &#34;/home/username&#34;,
+ stdout =&gt; &#34;/tmp/blog.log&#34;,
+ stderr =&gt; &#34;/tmp/blog.err.log&#34;,
+ ubic_log =&gt; &#34;/tmp/blog.ubic.log&#34;,
+ user =&gt; &#34;username&#34;
+);
+&lt;/pre&gt;
+</content><updated>2013-06-20T00:42:11Z</updated></entry><entry><title>Simple way to get wordpress going in vagrant</title><link href="http://astokes.org/post/simple-way-to-get-wordpress-going-in-vagrant"/><id>http://astokes.org/post/simple-way-to-get-wordpress-going-in-vagrant</id><content type="html">&lt;p&gt;Im working on some wordpress stuff recently and realized how much I dislike
+setting up php development environments. Specifically anything prior to php 5.4
+because of the lack of a built in web server.&lt;/p&gt;
+
+&lt;p&gt;I decided at this point it is a good time to invest some time into &lt;a href=&#34;http://vagrantup.com&#34;&gt;vagrant&lt;/a&gt; and
+attempt to get a more tolerable way of hacking on anything php. I managed to
+come across a &lt;a href=&#34;https://github.com/chad-thompson/vagrantpress&#34;&gt;github project&lt;/a&gt; that allows me to setup a vagrant session and have
+wordpress installed and configured with no fuss.&lt;/p&gt;
+
+&lt;p&gt;Fortunately, the developer is receptive to pull requests and merged a few of my
+additions to make this project a great way to get started with wordpress
+easily.&lt;/p&gt;
+
+&lt;p&gt;Here are the simple steps to getting a wordpress development environment setup
+in Ubuntu Precise (12.04) and on your way to hacking a new exciting plugin :)&lt;/p&gt;
+
+&lt;p&gt;First install VirtualBox&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ sudo apt-get install virtualbox
+&lt;/pre&gt;
+
+&lt;p&gt;Install &lt;a href=&#34;http://vagrantup.com&#34;&gt;vagrant&lt;/a&gt; from their site. Once that is done follow the next steps to
+get up and running.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ git clone https://github.com/chad-thompson/vagrantpress.git
+$ cd vagrantpress
+$ vagrant up
+&lt;/pre&gt;
+
+&lt;p&gt;You can view your wordpress installation at &lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+http://localhost:8080/wordpress
+# or for a more fqdn approach
+http://lvh.me:8080/wordpress
+&lt;/pre&gt;
+</content><updated>2013-06-18T22:06:41Z</updated></entry><entry><title>SOSreport reaches 3.0</title><link href="http://astokes.org/post/sosreport-reaches-30"/><id>http://astokes.org/post/sosreport-reaches-30</id><content type="html">&lt;h2 id=&#34;newrelease&#34;&gt;New release!&lt;/h2&gt;
+
+&lt;p&gt;After what seems like the longest development cycle ever we&#39;ve finally released
+sosreport 3.0.&lt;/p&gt;
+
+&lt;p&gt;Because of the lengthy development cycle I am just going to point you to the
+&lt;a href=&#34;https://github.com/sosreport/sosreport/commits/master&#34;&gt;commits&lt;/a&gt; to see what
+changes were made. The most notable changes are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Mult-distribution (Debian, Ubuntu, Fedora, RHEL)&lt;/li&gt;
+&lt;li&gt;Increase speed, roughly 2-3s for an average of 61 plugins tested against.&lt;/li&gt;
+&lt;li&gt;Cloud technologies included (but not limited too):
+&lt;ul&gt;
+&lt;li&gt;openstack&lt;/li&gt;
+&lt;li&gt;juju&lt;/li&gt;
+&lt;li&gt;maas&lt;/li&gt;
+&lt;li&gt;openshift&lt;/li&gt;
+&lt;li&gt;azure&lt;/li&gt;
+&lt;li&gt;cloudforms&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Cleaner codebase.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&#39;ve also uploaded sosreport to Debian archive and now just waiting on
+ftpmaster approval. Until then keep an eye out on my
+&lt;a href=&#34;https://launchpad.net/~debugmonkeys/+archive/sosreport&#34;&gt;ppa&lt;/a&gt; for updates.&lt;/p&gt;
+
+&lt;p&gt;Thanks to everyone involved!&lt;/p&gt;
+</content><updated>2013-06-10T14:09:55Z</updated></entry><entry><title>A new Mojolicious Plugin Blog in the works</title><link href="http://astokes.org/post/a-new-mojolicious-plugin-blog-in-the-works"/><id>http://astokes.org/post/a-new-mojolicious-plugin-blog-in-the-works</id><content type="html">&lt;p&gt;New plugin in the works to integrate a simple blogging system as a plugin for
+&lt;a href=&#34;http://mojolicio.us&#34;&gt;Mojolicious&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So far it supports most relational databases through DBIx::Connector and
+support for some social networks are coming soon.&lt;/p&gt;
+
+&lt;p&gt;Getting it going is straightforward a simple Mojolicious lite_app with a blog
+can be done in as a little as a few lines.&lt;/p&gt;
+
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# Set authentication condition
+my $conditions = {
+  authenticated =&gt; sub {
+    my $self = shift;
+    unless ($self-&gt;session(&#39;authenticated&#39;)) {
+      $self-&gt;flash(
+        class   =&gt; &#39;alert alert-info&#39;,
+        message =&gt; &#39;Please log in first!&#39;
+      );
+      $self-&gt;redirect_to(&#39;/login&#39;);
+      return;
+    }
+    return 1;
+  },
+};
+
+# Mojolicious full
+$self-&gt;plugin(&#39;Blog&#39; =&gt; {
+  authCondition =&gt; $conditions
+  dsn =&gt; &#34;dbi:Pg:dbname=myblog&#34;,
+  dbuser =&gt; &#39;zef&#39;,
+  dbpass =&gt; &#39;letmein&#39;,
+  }
+);
+
+# Mojolicious::Lite
+plugin &#39;Blog&#39; =&gt; {
+  authCondition =&gt; $conditions,
+  dsn =&gt; &#34;dbi:Pg:dbname=myblog&#34;,
+  dbuser =&gt; &#39;zef&#39;,
+  dbpass =&gt; &#39;letmein&#39;,
+};
+&lt;/pre&gt;
+
+&lt;p&gt;Support for user authentication is handled through an &lt;strong&gt;authCondition&lt;/strong&gt; and
+a routing bridge. Community contributions is always welcomed and you can visit
+the &lt;a href=&#34;https://github.com/battlemidget/Mojolicious-Plugin-Blog&#34;&gt;Project Page&lt;/a&gt; to
+find out more.&lt;/p&gt;
+
+&lt;p&gt;Some immediate future plans are to integrate disqus comments, twitter activity,
+and cross posting to sites like &lt;a href=&#34;https://coderwall.com&#34;&gt;coderwall&lt;/a&gt; and gravatar
+support.&lt;/p&gt;
+</content><updated>2013-06-01T00:34:18Z</updated></entry><entry><title>Deploy blagger with starman, rex and ubic</title><link href="http://astokes.org/post/deploy-blagger-with-starman-rex-and-ubic"/><id>http://astokes.org/post/deploy-blagger-with-starman-rex-and-ubic</id><content type="html">&lt;p&gt;If you come from a python or ruby background and are used to services
+such as virtualenv, rbenv then this document should be easy to
+follow. If not, no problem it is still easy :)&lt;/p&gt;
+
+&lt;h2 id=&#34;pre-reqs&#34;&gt;Pre-reqs&lt;/h2&gt;
+
+&lt;p&gt;Youll want to install perlbrew which is perl&#39;s equivalent to virtualenv and rbenv.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ curl -kL http://install.perlbrew.pl | bash
+&lt;/pre&gt;
+
+&lt;p&gt;Follow the on screen instructions and install your desired perl version (this doc uses 5.18.1)&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ perlbrew install perl-5.18.1
+$ perlbrew switch perl-5.18.1
+&lt;/pre&gt;
+
+&lt;p&gt;Install cpanm&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ perlbrew install-cpanm
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;h3 id=&#34;checkoutsourcelocallyandonremoteserver&#34;&gt;Checkout source locally and on remote server&lt;/h3&gt;
+
+&lt;p&gt;It is best to fork the code into your github account since you&#39;ll be
+storing your own posts. This is for demonstration only.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ git clone git://github.com/battlemidget/ztunzeed.git
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;installdependencieslocallyandonremoteserver&#34;&gt;Install dependencies locally and on remote server&lt;/h3&gt;
+
+&lt;p&gt;This is equivalent to python&#39;s pip or ruby&#39;s gem.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ cpanm --installdeps .
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;setupnginxonremoteserver&#34;&gt;Setup nginx on remote server&lt;/h3&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ cp blog.nginx.conf /etc/nginx/sites-enabled/blog.conf
+&lt;/pre&gt;
+
+&lt;p&gt;Edit the configuration to match your hostname and root directory for this application.&lt;/p&gt;
+
+&lt;h3 id=&#34;setupubicontheremoteserverwhereyouhostyourblog&#34;&gt;Setup &lt;a href=&#34;https://metacpan.org/release/Ubic&#34;&gt;Ubic&lt;/a&gt; on the remote server where you host your blog&lt;/h3&gt;
+
+&lt;p&gt;You can install this right in your home directory to keep your application self-contained.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ ubic-admin setup
+&lt;/pre&gt;
+
+&lt;p&gt;Place the following in your $HOME/ubic/service/blog&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+use Ubic::Service::Plack;
+return Ubic::Service::Plack-&gt;new({
+   server =&gt; &#34;Starman&#34;,
+   server_args =&gt; {
+   env =&gt; &#39;production&#39;,
+   host =&gt; &#39;127.0.0.1&#39;,
+   workers =&gt; 5,
+   port =&gt; 9001,
+ },
+ app =&gt; &#39;/home/blagger/blagger&#39;,
+ app_name =&gt; &#39;blagger&#39;,
+});
+&lt;/pre&gt;
+
+&lt;p&gt;Start the service monitor&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ ubic start blog
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;writeablogpost&#34;&gt;Write a blog post&lt;/h2&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ ./blagger blag a-new-blog-post
+&lt;/pre&gt;
+
+&lt;h2 id=&#34;commitanddeploy&#34;&gt;Commit and deploy&lt;/h2&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ git commit -asm &#39;new blog post&#39; &#38;&#38; git push -q
+$ rex deploy
+&lt;/pre&gt;
+
+&lt;p&gt;This will deploy and checkout your source remotely via &lt;a href=&#34;http://rexify.org&#34;&gt;Rex&lt;/a&gt; and restart the gaurdian service for the blog.&lt;/p&gt;
+
+&lt;p&gt;Once you&#39;ve done the first deployment any future posts only require you to commit to git and deploy.&lt;/p&gt;
+</content><updated>2013-05-23T15:24:15Z</updated></entry><entry><title>blagger - perl blogging software</title><link href="http://astokes.org/post/blagger---perl-blogging-software"/><id>http://astokes.org/post/blagger---perl-blogging-software</id><content type="html">&lt;p&gt;I was using octopress for awhile but I still have mixed feelings about
+ruby. There isn&#39;t anything wrong with ruby, but, as the creator of
+ruby said &#34;its how you feel when writing in a language&#34; and I don&#39;t
+think me and ruby are on the same page.&lt;/p&gt;
+
+&lt;p&gt;I started looking around for a simple one file blogging system with
+minimal dependencies and could be extended easily. I attempted to
+write my own with using a cpan package called fatpacker. The idea
+behind it is cool, however, I couldn&#39;t get it to fully work with the
+modules I needed. I scratched that project the first day and just
+happened to stumble across &lt;a href=&#34;https://github.com/avenj/blagger&#34;&gt;blagger&lt;/a&gt;. It is relatively new and
+doesn&#39;t have a lot of features (which I believe was the authors
+point).&lt;/p&gt;
+
+&lt;p&gt;What got me interested was it is written in Perl, easy to hack on, and
+has a small amount of dependencies. It uses Mojolicious as a web
+framework which allowed me to put all code and templates within the
+blagger file. The code itself is well written and allowed me to get up
+to speed on the design quickly.&lt;/p&gt;
+
+&lt;p&gt;I&#39;ve converted my current blog to &lt;a href=&#34;https://github.com/battlemidget/blagger&#34;&gt;blagger with my own
+modifications&lt;/a&gt;. Some additional features include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Categories&lt;/li&gt;
+&lt;li&gt;RSS Feeds for /*/:category/atom.xml and the root path for all
+articles.&lt;/li&gt;
+&lt;li&gt;Generates posts with YYYY/MM/DD prepended (keeps everything in a
+good order)&lt;/li&gt;
+&lt;li&gt;Gravatar support (elementary, could stand to use something other
+than hard coded urls :))&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Some things I plan on adding&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;gist support&lt;/li&gt;
+&lt;li&gt;syntax highlighter&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I don&#39;t plan on adding much more than the bare minimum for someone who
+writes about coding projects and an occasional rant. Patches are
+definately welcomed.&lt;/p&gt;
+</content><updated>2013-05-21T02:13:41Z</updated></entry><entry><title>python-salesforce on pypi</title><link href="http://astokes.org/post/python-salesforce-on-pypi"/><id>http://astokes.org/post/python-salesforce-on-pypi</id><content type="html">&lt;p&gt;I&#39;ve got a project going to utilize Salesforce.com api over json and oauth
+rather than soap. Today I uploaded the package to the cheeseshop in hopes to
+pull in some interest from the community.&lt;/p&gt;
+
+&lt;p&gt;Right now the library contains authorization over OAuth 1.0a and client methods
+for retrieving basic Account, Case, and Asset information. My goal is to be api
+complete by the end of the year.&lt;/p&gt;
+
+&lt;p&gt;I would love to have contributors join the project in order to shape this young
+project into a well documented, tested, and easy to use library. As far as
+I can tell there isn&#39;t another python library like this that doesn&#39;t utilize
+SOAP for its endpoints.&lt;/p&gt;
+
+&lt;p&gt;Using the library is pretty straight forward, currently, I have 2 scripts that
+provide a simple way to authorize yourself and communicate with the endpoints.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;sf-exchange-auth&lt;/strong&gt; provides a local ssl enabled web server for going through
+the OAuth process and storing your token/secret.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;sf-cli&lt;/strong&gt; provides some arguments for pulling in rudimentary account and case
+information. Usage documentation is provided for this script.&lt;/p&gt;
+
+&lt;p&gt;The current focus is to stick to the
+&lt;a href=&#34;http://en.wikipedia.org/wiki/You_Ain%27t_Gonna_Need_It&#34;&gt;YAGNI&lt;/a&gt; principles and
+utilize OO when it makes sense. This may or may not be the way to go so I am
+open to ideas and patches :D.&lt;/p&gt;
+
+&lt;p&gt;You can currently install python-salesforce through pip&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ pip install python-salesforce
+&lt;/pre&gt;
+
+&lt;p&gt;The project page is located at&lt;/p&gt;
+
+&lt;p&gt;http://python.salesforce.astokes.org&lt;/p&gt;
+
+&lt;p&gt;Looking forward to hearing from you.&lt;/p&gt;
+</content><updated>2013-05-20T23:04:34Z</updated></entry><entry><title>x230T, realtek wifi, and my solution</title><link href="http://astokes.org/post/x230t-realtek-wifi-and-my-solution"/><id>http://astokes.org/post/x230t-realtek-wifi-and-my-solution</id><content type="html">&lt;h2 id=&#34;recap&#34;&gt;Recap&lt;/h2&gt;
+
+&lt;p&gt;I can ping all devices on the network &lt;em&gt;except&lt;/em&gt; the gateway
+(192.168.0.1) and in turn can not access outside of the network
+without proxying through another device.&lt;/p&gt;
+
+&lt;p&gt;The system:&lt;/p&gt;
+
+&lt;p&gt;Lenovo x230 Tablet with a Realtek wifi adapter running on Quantal:&lt;/p&gt;
+
+&lt;p&gt;Network controller: Realtek Semiconductor Co., Ltd. RTL8188CE
+802.11b/g/n WiFi Adapter (rev 01)&lt;/p&gt;
+
+&lt;p&gt;The wtf:&lt;/p&gt;
+
+&lt;p&gt;I can obtain an IP from the router&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+wlan0 Link encap:Ethernet HWaddr e0:06:e6:c2:d2:e0
+inet addr:192.168.0.102 Bcast:192.168.0.255 Mask:255.255.255.0
+inet6 addr: fe80::e206:e6ff:fec2:d2e0/64 Scope:Link
+UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1
+RX packets:178844 errors:0 dropped:0 overruns:0 frame:0
+TX packets:101517 errors:0 dropped:0 overruns:0 carrier:0
+collisions:0 txqueuelen:1000
+RX bytes:121465876 (121.4 MB) TX bytes:10612848 (10.6 MB)
+&lt;/pre&gt;
+
+&lt;p&gt;I can ping other devices:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+&#10140; ~ ping 192.168.0.101
+PING 192.168.0.101 (192.168.0.101) 56(84) bytes of data.
+64 bytes from 192.168.0.101: icmp_req=1 ttl=64 time=3.84 ms
+64 bytes from 192.168.0.101: icmp_req=2 ttl=64 time=1.32 ms
+&lt;/pre&gt;
+
+&lt;p&gt;I can not ping the gateway:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+&#10140; ~ ping 192.168.0.1
+PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
+From 192.168.0.102 icmp_seq=1 Destination Host Unreachable
+From 192.168.0.102 icmp_seq=2 Destination Host Unreachable
+&lt;/pre&gt;
+
+&lt;p&gt;My resolv.conf is autogenerated with:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+&#10140; ~ cat /etc/resolv.conf
+# Dynamic resolv.conf(5) file for glibc resolver(3) generated by
+resolvconf(8)
+# DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN
+nameserver 127.0.1.1
+search nc.rr.com
+&lt;/pre&gt;
+
+&lt;p&gt;My /etc/hosts:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+&#10140; ~ cat /etc/hosts
+127.0.0.1 localhost
+127.0.1.1 quantal
+&lt;/pre&gt;
+
+&lt;p&gt;My routing table:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+&#10140; ~ route
+Kernel IP routing table
+Destination Gateway Genmask Flags Metric Ref Use Iface
+default 192.168.0.1 0.0.0.0 UG 0 0 0 wlan0
+link-local * 255.255.0.0 U 1000 0 0 wlan0
+192.168.0.0 * 255.255.255.0 U 9 0 0 wlan0
+&lt;/pre&gt;
+
+&lt;p&gt;Lastly, my module info for device:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+&#10140; ~ modinfo rtl8192ce
+filename: /lib/modules/3.5.0-17-generic/kernel/drivers/net/wireless/rtlwifi/rtl8192ce/rtl8192ce.ko
+firmware: rtlwifi/rtl8192cfw.bin
+description: Realtek 8192C/8188C 802.11n PCI wireless
+license: GPL
+author: Larry Finger &lt;Larry.Finger@lwfinger.net&gt;
+author: Realtek WlanFAE &lt;wlanfae@realtek.com&gt;
+author: lizhaoming &lt;chaoming_li@realsil.com.cn&gt;
+srcversion: DD4F3D83A75531AC98862F2
+alias: pci:v000010ECd00008176sv*sd*bc*sc*i*
+alias: pci:v000010ECd00008177sv*sd*bc*sc*i*
+alias: pci:v000010ECd00008178sv*sd*bc*sc*i*
+alias: pci:v000010ECd00008191sv*sd*bc*sc*i*
+depends: rtlwifi,mac80211
+vermagic: 3.5.0-17-generic SMP mod_unload modversions
+parm: swlps:bool
+parm: swenc:using hardware crypto (default 0 [hardware])
+(bool)
+parm: ips:using no link power save (default 1 is open)
+(bool)
+parm: fwlps:using linked fw control power save (default 1 is open)
+(bool)
+&lt;/pre&gt;
+
+&lt;p&gt;Things I&#39;ve attempted:&lt;/p&gt;
+
+&lt;p&gt;Turning off fwlps, ips. Attempted to compile a driver from upstream
+and even tried the latest daily mainline kernel for Quantal.&lt;/p&gt;
+
+&lt;p&gt;Has anyone seen this before? What really baffles me is that I can not
+ping the gateway. To verify I can ping the gateway from another
+system:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+~ : ping 192.168.0.1
+PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
+64 bytes from 192.168.0.1: icmp_req=1 ttl=64 time=1.35 ms
+64 bytes from 192.168.0.1: icmp_req=2 ttl=64 time=1.22 ms
+64 bytes from 192.168.0.1: icmp_req=3 ttl=64 time=5.11 ms
+&lt;/pre&gt;
+
+&lt;p&gt;This also doesn&#39;t happen outside of my network as I was able to use
+this laptop at UDS-R which kind of points to a router issue but
+anything without a Realtek adapter works :\&lt;/p&gt;
+
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;Turns out that this particular laptop was having issues resolving dns queries because on my particular cable modem/router there was an option for &#34;Enable DNS relay&#34; that was not checked (off). Once I checked that option my laptop suddenly started working! I tried to do some more research on what could be a possible reason as to why this specific laptop/wifi combo requires dns relay to be enabled on the router in order to access anything outside my network? Another odd thing is that if I directly connect the laptop to the router everything works so I assume it is something to do with the actual wifi driver/hardware. Anyway, I&#39;m finally back to being able to use my recently purchased laptop :)&lt;/p&gt;
+
+&lt;p&gt;p.s - Im in London next week so if any kernel guys are feeling gracious and would like to look at my laptop I&#39;ll have it with me.&lt;/p&gt;
+</content><updated>2013-03-22T15:00:00Z</updated></entry><entry><title>Mental Note: Django 1.4.x and Storm .19</title><link href="http://astokes.org/post/mental-note-django-14x-and-storm-19"/><id>http://astokes.org/post/mental-note-django-14x-and-storm-19</id><content type="html">&lt;p&gt;Some notes on getting Storm used as a database backend for Django. Props to James Henstridge for doing the heavy lifting.&lt;/p&gt;
+
+&lt;h3 id=&#34;setupvirtualenvandinstalldependencies:&#34;&gt;Setup virtualenv and install dependencies:&lt;/h3&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ virtualenv --prompt=stormy venv
+$ source venv/bin/activate
+$ pip install django storm psycopg2 pytz python-dateutil
+$ pip freeze &gt; requirements.txt
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;setupdjangoskeleton&#34;&gt;Setup django skeleton&lt;/h3&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ django-admin.py startproject myproject
+$ cd myproject
+$ python manage.py startapp common
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;editsettings.pytoincludethepropermiddlewareandstorm_stores&#34;&gt;Edit &lt;strong&gt;settings.py&lt;/strong&gt; to include the proper middleware and STORM_STORES&lt;/h3&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+MIDDLEWARE_CLASSES = (
+        &#39;django.middleware.common.CommonMiddleware&#39;,
+        &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
+        &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,
+        &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
+        &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
+        &#39;storm.django.middleware.ZopeTransactionMiddleware&#39;,       # Added this line
+        # Uncomment the next line for simple clickjacking pro
+        )
+
+STORM_STORES = { &#39;default&#39; : &#34;postgres://adam@localhost/testdb&#34; }
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;nextinmyappaddsomemodels&#34;&gt;Next in my app add some models&lt;/h3&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+from django.db import models
+from storm.sqlobject import StringCol, UtcDateTimeCol, BoolCol, IntCol
+from storm.locals import Int
+from storm.expr import SQL
+from datetime import datetime
+from pytz import UTC
+import dateutil.parser
+
+class Bug(models.Model):
+      __storm_table__ = &#34;bug&#34;
+      id = Int(primary=True,)
+      date_created = UtcDateTimeCol(notNull=True,)
+      date_last_message = UtcDateTimeCol()
+      date_last_updated = UtcDateTimeCol()
+      date_made_private = UtcDateTimeCol()
+      description = StringCol(notNull=True,)
+      duplicate_of = IntCol()
+      heat = IntCol()
+      gravity = IntCol()
+      information_type = StringCol()
+      latest_patch_uploaded = UtcDateTimeCol()
+      message_count = IntCol(notNull=True,)
+      number_of_duplicates = IntCol()
+      other_users_affected_count_with_dupes = IntCol()
+      owner = IntCol(notNull=True,)
+      private = BoolCol(notNull=True, default=False,)
+      security_related = BoolCol(notNull=True, default=True,)
+      tags = StringCol()
+      title = StringCol(notNull=True,)
+      users_affected_count = IntCol()
+      users_affected_count_with_dupes = IntCol()
+      web_link = StringCol()
+      who_made_private = IntCol()
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;pullthedataintotheview&#34;&gt;Pull the data into the view&lt;/h3&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+from django.core.context_processors import csrf
+from django.shortcuts import render_to_response, HttpResponseRedirect
+from storm.django.stores import *
+from myproject.common.models import *
+
+def index(request):
+    store = get_store(&#39;default&#39;)
+    bug = store.find(Bug)
+    return render_to_response(&#34;common/index.html&#34;, { &#39;bug&#39; : bug })
+&lt;/pre&gt;
+
+&lt;h3 id=&#34;finallyeditthetemplatetodisplaythedata&#34;&gt;Finally, edit the template to display the data&lt;/h3&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+{% raw %}
+{% extends &#39;layout.html&#39; %}
+
+{% block page_name %}Home{% endblock %}
+
+{% block content %}
+{% for b in bug %}
+  {{ b.id }} : {{ b.title }}
+{% endfor %}
+{% endblock content %}
+{% endraw %}
+&lt;/pre&gt;
+
+&lt;p&gt;Things to do:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Have &lt;strong&gt;get_store&lt;/strong&gt; persisted when the application starts&lt;/li&gt;
+&lt;li&gt;Integrate migrations with South&lt;/li&gt;
+&lt;li&gt;Integrate with something like celery for running some background jobs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I haven&#39;t done anything major other than a few queries so time will tell how well this does when this project really gets into making use of Storm.&lt;/p&gt;
+</content><updated>2013-02-21T15:00:00Z</updated></entry><entry><title>SOSreport now supports Debian/Ubuntu</title><link href="http://astokes.org/post/sosreport-now-supports-debianubuntu"/><id>http://astokes.org/post/sosreport-now-supports-debianubuntu</id><content type="html">&lt;p&gt;Sosreport is a set of tools is designed to provide information to support organizations
+in an extensible manner, allowing third parties, package maintainers, and
+anyone else to provide plugins that will collect and report information that
+is useful for supporting software packages.&lt;/p&gt;
+
+&lt;p&gt;This project is hosted at &lt;a href=&#34;http://github.com/sosreport/sosreport&#34;&gt;Github&lt;/a&gt; For the latest
+version, to contribute, and for more information, please visit there.&lt;/p&gt;
+
+&lt;p&gt;Installing it through Launchpad PPA:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    sudo add-apt-repository ppa:debugmonkeys/sosreport
+    sudo apt-get update
+    sudo apt-get install sosreport
+&lt;/pre&gt;
+
+&lt;p&gt;If you are coming from a Red Hat Enterprise Linux or Fedora background and are familiar with sosreport we&#39;d like to invite you to participate in porting over plugins to work across these distributions as well. Several plugins have been ported over that you can use as a guide for making other plugins distribution aware.&lt;/p&gt;
+</content><updated>2013-01-08T15:00:00Z</updated></entry><entry><title>Experimenting with clojure and protocols</title><link href="http://astokes.org/post/experimenting-with-clojure-and-protocols"/><id>http://astokes.org/post/experimenting-with-clojure-and-protocols</id><content type="html">&lt;p&gt;I started messing around with some clojure code recently to see what I
+could come up with in a short period of time. My main goal was to
+provide some sort of overlay to adding a specific dispatch to handle
+different datatypes when inserting into a database. So for my
+experiment I decided to use the jdbc interface within Clojure and some
+built-in function/macros to try and make light of my idea.&lt;/p&gt;
+
+&lt;p&gt;First I created my namespace to keep everything organized.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    (ns rosay.models
+      (:require [clojure.java.jdbc :as sql]))
+&lt;/pre&gt;
+
+&lt;p&gt;Next I defined a postgres database to use and already had some tables
+created with a few simple constraints. I won&#39;t go into those details
+but I&#39;ll show you what the connection looks like.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    (def rosay-db
+      {:subprotocol &#34;postgresql&#34;
+       :subname &#34;//localhost/rosaydb&#34;
+       :user &#34;adbuser&#34;
+       :password &#34;dbpass&#34;})
+&lt;/pre&gt;
+
+&lt;p&gt;From there I defined a helper function to deal with inserting the
+record into the database.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    (defn- db-insert
+      [table record]
+      &#34;Inserts record based on table/record map&#34;
+      (sql/with-connection
+        rosay-db
+        (sql/transaction
+         (sql/insert-record table record))))
+&lt;/pre&gt;
+
+&lt;p&gt;All this was outlined in the relevant api documentation. From this
+point I setup a protocol to hopefully help me abstract out what to do
+for different datatypes I wish to store.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    ;; public interface
+    (defprotocol DBFactory
+      (add-item [_] &#34;Adds item to db&#34;))
+&lt;/pre&gt;
+
+&lt;p&gt;I&#39;ve defined &lt;strong&gt;add-item&lt;/strong&gt; in order to facilitate what it is I wish to
+do to each record. The records I am current concentrating on are
+these:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    (defrecord Page [name description keywords frontpage client_id pages_type_id]
+      DBFactory
+      (add-item [_]
+        (db-insert :pages {:name name
+                                      :description description
+                                      :keywords keywords
+                                      :frontpage frontpage
+                                      :client_id client_id
+                                      :pages_type_id pages_type_id})))
+
+    (defrecord Client [username password email domain]
+      DBFactory
+      (add-item [_]
+        (db-insert :clients {:username username
+                             :password password
+                             :email email
+                             :domain domain})))
+&lt;/pre&gt;
+
+&lt;p&gt;With this code in place I load up my REPL and attempt to add a Client
+and a Page to my database.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    rosay.server=&gt; (use &#39;rosay.models)
+     nil
+     rosay.server=&gt; (add-item (-&gt;Client &#34;booyaka&#34; &#34;fark&#34; &#34;mailzer&#34; &#34;domain.com&#34;))
+     {:updated_on nil, :created_on #inst
+     &#34;2012-12-04T04:25:22.672462000-00:00&#34;, :email &#34;mailzer&#34;,
+     :domain &#34;domain.com&#34;, :password &#34;fark&#34;, :username &#34;booyaka&#34;, :id 10}
+
+     rosay.server=&gt; (add-item (-&gt;Page &#34;im a new page&#34; &#34;description of new page&#34; &#34;somekeywords,keywords true 10 1))
+    {:updated_on nil, :created_on #inst &#34;2012-12-04T04:41:41.716319000-00:00&#34;, :pages_type_id 1, :client_id 10, :frontpage true, :keywords &#34;somekeywords,keywords&#34;, :description &#34;description of new page&#34;, :name &#34;im a new page&#34;, :id 4}
+&lt;/pre&gt;
+
+&lt;p&gt;So it looked like it added my records based on the type to the correct
+tables.&lt;/p&gt;
+
+&lt;p&gt;In summary, it was pretty easy to setup and the approach seems
+straight forward to me. Although, I&#39;ve created a SO post to get input
+from the more experienced clojure developers on whether or not this
+even makes sense. Hopefully, I&#39;m not to far off base with attempting
+to abstract out the low-level database interactions when wanting to
+add some sort of dispatch-like system when adding records to a
+database.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;NB&lt;/em&gt;&lt;/strong&gt; This entire post could be completely off as I am in no-way a
+seasoned clojure/lisp programmer. Recommendations/changes are always welcomed!&lt;/p&gt;
+</content><updated>2012-12-04T15:00:00Z</updated></entry><entry><title>Multiline sql statements in clojure</title><link href="http://astokes.org/post/multiline-sql-statements-in-clojure"/><id>http://astokes.org/post/multiline-sql-statements-in-clojure</id><content type="html">&lt;p&gt;&lt;strong&gt;&lt;em&gt;NB&lt;/em&gt;&lt;/strong&gt; Most of these articles are geared towards those are who not
+really familiar with Clojure and are just getting started. (like me)&lt;/p&gt;
+
+&lt;p&gt;As I&#39;m continuing to dig through clojure and specifically database
+interactions I&#39;ve been writing some simple sql statements with a few
+joins. First off we&#39;ll define our namespace:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    (ns rosay.models
+      (:require [clojure.java.jdbc :as sql]
+                [clojure.string :as string]))
+&lt;/pre&gt;
+
+&lt;p&gt;Next I&#39;ve written a simple helper function that will read in an sql
+statement with optional arguments.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    (defn db-read
+      &#34;processes query returns result&#34;
+      [query &#38; args]
+      (sql/with-connection
+        rosay-db
+        (sql/with-query-results res (vec (cons query args)) (doall res))))
+&lt;/pre&gt;
+
+&lt;p&gt;From here we can do something like:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    rosay.server=&gt; (def client-id 1)
+    rosay.server=&gt; (db-read &#34;select * from clients where id=?&#34; client-id)
+&lt;/pre&gt;
+
+&lt;p&gt;This is simple and straightforward approach, but, I&#39;d like to be able
+to add more complexity to the sql statement and still keep things
+rather readable in emacs.&lt;/p&gt;
+
+&lt;p&gt;This helper function basically takes a vector and joins it with a
+&lt;em&gt;space&lt;/em&gt;. Nothing fancy or even fault tolerant but for this experiment
+it works.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    (defn- simple-query
+      [query]
+      &#34;Vector of query data for multiline sql statements&#34;
+      (string/join &#34; &#34; query))
+&lt;/pre&gt;
+
+&lt;p&gt;Now that I have this simple query builder I can expand on the
+complexity of my SQL statements but still keep it readable.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    (defn get-pages [client-id]
+      &#34;return associated client pages&#34;
+      (db-read (simple-query [&#34;SELECT p.*, c.username, pt.name as page_type from pages p&#34;
+                              &#34;LEFT OUTER JOIN clients as c on p.client_id = c.id&#34;
+                              &#34;LEFT OUTER JOIN pages_types as pt on p.pages_type_id = pt.id&#34;
+                              &#34;WHERE client_id=?&#34;
+                              ]) client-id))
+&lt;/pre&gt;
+
+&lt;p&gt;From my research there wasn&#39;t really a decent way to do multiline like
+above so this was the simplest thing I could come up with.&lt;/p&gt;
+
+&lt;p&gt;Finally, to test from the nrepl I can run:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    rosay.server=&gt; (use &#39;rosay.models)
+    nil
+    rosay.server=&gt; (get-pages 19)
+    ({:created_on #inst &#34;2012-12-04T19:23:06.614156000-00:00&#34;, :keywords
+    &#34;words&#34;, :pages_type_id 11, :name &#34;nameo&#34;, :updated_on nil, :client_id
+    19, :username &#34;beef, :page_type &#34;article&#34;, :frontpage true, :id 7,
+    :description &#34;description&#34;} {:created_on #inst
+    &#34;2012-12-04T19:23:09.109556000-00:00&#34;, :keywords &#34;words&#34;,
+    :pages_type_id 11, :name &#34;nameo&#34;, :updated_on nil, :client_id 19,
+    :username beef&#34;, :page_type &#34;article&#34;, :frontpage true, :id 8,
+    :description &#34;description&#34;})
+&lt;/pre&gt;
+
+&lt;p&gt;I&#39;ll be improving on these in time but in the distant future this is
+suitable for my experiements.&lt;/p&gt;
+</content><updated>2012-12-04T15:00:00Z</updated></entry><entry><title>Lenovo x230 Tablet tips</title><link href="http://astokes.org/post/lenovo-x230-tablet-tips"/><id>http://astokes.org/post/lenovo-x230-tablet-tips</id><content type="html">&lt;p&gt;Some tips for getting around the lack of tablet functionality with Ubuntu Precise and even Quantal. First is a small shell script for disabling finger touch on the tablet when you want to use the stylus for writing/drawing.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    #!/bin/bash
+    # This script can be used to toggle enable state of wacom multitouch screen for
+    # Thinkpad Tablet Series. You may need to change the name of multitouch device 
+    # which can be found by running *xinput list* command
+
+    TOGGLE=$HOME/.multitouch_toggle
+
+    if [ ! -e $TOGGLE ]; then
+        touch $TOGGLE
+        xinput set-prop &#39;Wacom ISDv4 E6 Finger touch&#39; &#39;Device Enabled&#39; 0
+    else
+        rm $TOGGLE
+        xinput set-prop &#39;Wacom ISDv4 E6 Finger touch&#39; &#39;Device Enabled&#39; 1
+    fi
+&lt;/pre&gt;
+
+&lt;p&gt;This allows you to place your hand comfortably down on the tablet while you hand write notes in applications such as Xournal or drawing in applications such as MyPaint.&lt;/p&gt;
+
+&lt;p&gt;Another script for rotating the orientation and making sure the mouse recognizes the new quadrants (rather than up being down, down being up, etc) can be found on github. The url for that project is &lt;a href=&#34;https://github.com/martin-ueding/think-rotate.git&#34;&gt;think-rotate&lt;/a&gt;. You can rotate left, right, and back to default. This works in all desktop environments and window managers, however, attempting to navigate smoothly through the UI like you would within a smartphone or android/iphone tablet still needs some more work. As of right now Unity is the same UI no matter the resolution or orientation of the device.&lt;/p&gt;
+
+&lt;p&gt;I am going to do some more work and hopefully get some integrated hotkey events into udev so that you may simply swivel the screen into a tablet and the orientation happens automatically.&lt;/p&gt;
+</content><updated>2012-11-01T00:00:59Z</updated></entry><entry><title>Exporting variables for Eshell</title><link href="http://astokes.org/post/exporting-variables-for-eshell"/><id>http://astokes.org/post/exporting-variables-for-eshell</id><content type="html">&lt;p&gt;Usually when I&#39;m working in Emacs it is running as a daemon. A lot of
+times when I&#39;m doing patch work and commits it&#39;ll want to dump me into
+an editor set by my shell settings. More times than not this is
+problematic because my editor may be set to nano or vim and rendering
+in the eshell is ugly. So far all emacs/eshell sessions I wanted to
+make sure my EDITOR/VISUAL environment variables were defined with
+&#39;emacsclient -n&#39; in order to push all commit changes into a new buffer
+window to be edited.&lt;/p&gt;
+
+&lt;p&gt;To remedy this I use a eshell hook to automatically set my environment
+variables while in the shell without messing with anything I may have
+set outside of emacs.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    (add-hook &#39;eshell-mode-hook
+              &#39;(lambda nil
+                 (eshell/export &#34;EDITOR=emacsclient -n&#34;)
+                 (eshell/export &#34;VISUAL=emacsclient -n&#34;)))
+&lt;/pre&gt;
+
+&lt;p&gt;Pretty straight forward and keeps my eshell editing happy.&lt;/p&gt;
+</content><updated>2012-10-18T00:00:59Z</updated></entry><entry><title>Tornado 2.3+ dropbox auth mixin</title><link href="http://astokes.org/post/tornado-23-dropbox-auth-mixin"/><id>http://astokes.org/post/tornado-23-dropbox-auth-mixin</id><content type="html">&lt;p&gt;Working on &lt;a href=&#34;http://tornadoweb.org&#34;&gt;Tornado&lt;/a&gt; web application server has been a great
+experience. I&#39;ve written a few simple OAuth mixin&#39;s and this
+one is for dropbox. It&#39;s been tested and works, however, I am
+probably including way to many method overrides. If anyone
+would like to update the gist please feel free and I&#39;ll make
+sure to link it in this post.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+class DropboxMixin(tornado.auth.OAuthMixin):
+    &#34;&#34;&#34; Dropbox  OAuth authentication.
+    &#34;&#34;&#34;
+    _OAUTH_REQUEST_TOKEN_URL = &#34;https://api.dropbox.com/1/oauth/request_token&#34;
+    _OAUTH_ACCESS_TOKEN_URL = &#34;https://api.dropbox.com/1/oauth/access_token&#34;
+    _OAUTH_AUTHORIZE_URL = &#34;https://www.dropbox.com/1/oauth/authorize&#34;
+    _OAUTH_VERSION = &#34;1.0&#34;
+    _OAUTH_NO_CALLBACKS = False
+
+    def authorize_redirect(self, callback_uri=None, extra_params=None,
+                           http_client=None):
+        &#34;&#34;&#34;Redirects the user to obtain OAuth authorization for this service.
+
+        Twitter and FriendFeed both require that you register a Callback
+        URL with your application. You should call this method to log the
+        user in, and then call get_authenticated_user() in the handler
+        you registered as your Callback URL to complete the authorization
+        process.
+
+        This method sets a cookie called _oauth_request_token which is
+        subsequently used (and cleared) in get_authenticated_user for
+        security purposes.
+        &#34;&#34;&#34;
+        http_client = httpclient.AsyncHTTPClient()
+        http_client.fetch(
+            self._oauth_request_token_url(), self.async_callback(
+            self._on_request_token, self._OAUTH_AUTHORIZE_URL, callback_uri))
+
+    def get_authenticated_user(self, callback, http_client=None):
+        &#34;&#34;&#34;Gets the OAuth authorized user and access token on callback.
+
+        This method should be called from the handler for your registered
+        OAuth Callback URL to complete the registration process. We call
+        callback with the authenticated user, which in addition to standard
+        attributes like &#39;name&#39; includes the &#39;access_key&#39; attribute, which
+        contains the OAuth access you can use to make authorized requests
+        to this service on behalf of the user.
+
+        &#34;&#34;&#34;
+        request_key = escape.utf8(self.get_argument(&#34;oauth_token&#34;))
+        oauth_verifier = self.get_argument(&#34;oauth_verifier&#34;, None)
+        request_cookie = self.get_cookie(&#34;_oauth_request_token&#34;)
+        if not request_cookie:
+            logging.warning(&#34;Missing OAuth request token cookie&#34;)
+            callback(None)
+            return
+        self.clear_cookie(&#34;_oauth_request_token&#34;)
+        cookie_key, cookie_secret = [base64.b64decode(escape.utf8(i)) for i in request_cookie.split(&#34;|&#34;)]
+        if cookie_key != request_key:
+            logging.info((cookie_key, request_key, request_cookie))
+            logging.warning(&#34;Request token does not match cookie&#34;)
+            callback(None)
+            return
+        token = dict(key=cookie_key, secret=cookie_secret)
+        if oauth_verifier:
+            token[&#34;verifier&#34;] = oauth_verifier
+        if http_client is None:
+            http_client = httpclient.AsyncHTTPClient()
+        http_client.fetch(self._oauth_access_token_url(token),
+                          self.async_callback(self._on_access_token, callback))
+
+    def _on_access_token(self, callback, response):
+        if response.error:
+            logging.warning(&#34;Could not fetch access token&#34;)
+            callback(None)
+            return
+
+        access_token = _oauth_parse_response(response.body)
+        self._oauth_get_user(access_token, self.async_callback(
+             self._on_oauth_get_user, access_token, callback))
+
+    def _on_oauth_get_user(self, access_token, callback, user):
+        if not user:
+            callback(None)
+            return
+        user[&#34;access_token&#34;] = access_token
+        callback(user)
+
+    def dropbox_request(self, path, callback, access_token=None,
+                        post_args=None, **args):
+        # Add the OAuth resource request signature if we have credentials
+        url = &#34;https://api.dropbox.com/1&#34; + path
+        if access_token:
+            all_args = {}
+            all_args.update(args)
+            all_args.update(post_args or {})
+            method = &#34;POST&#34; if post_args is not None else &#34;GET&#34;
+            oauth = self._oauth_request_parameters(
+                url, access_token, all_args, method=method)
+            args.update(oauth)
+        if args: url += &#34;?&#34; + urllib.urlencode(args)
+        callback = self.async_callback(self._on_dropbox_request, callback)
+        http = httpclient.AsyncHTTPClient()
+        if post_args is not None:
+            http.fetch(url, method=&#34;POST&#34;, body=urllib.urlencode(post_args),
+                       callback=callback)
+        else:
+            http.fetch(url, callback=callback)
+
+    def _on_dropbox_request(self, callback, response):
+        if response.error:
+            print(&#34;Error response %s fetching %s&#34;, response.error,
+                            response.request.url)
+            callback(None)
+            return
+        callback(escape.json_decode(response.body))
+
+    def _oauth_consumer_token(self):
+        self.require_setting(&#34;dropbox_consumer_key&#34;, &#34;Dropbox OAuth&#34;)
+        self.require_setting(&#34;dropbox_consumer_secret&#34;, &#34;Dropbox OAuth&#34;)
+        return dict(
+            key=self.settings[&#34;dropbox_consumer_key&#34;],
+            secret=self.settings[&#34;dropbox_consumer_secret&#34;])
+
+    def _oauth_get_user(self, access_token, callback):
+        callback = self.async_callback(self._parse_user_response, callback)
+        self.dropbox_request(
+            &#34;/account/info&#34;,
+            access_token=access_token,
+            callback=callback)
+
+    def _parse_user_response(self, callback, user):
+        if user:
+            user[&#34;username&#34;] = user[&#34;display_name&#34;]
+        callback(user)
+&lt;/pre&gt;
+</content><updated>2012-09-27T00:00:59Z</updated></entry><entry><title>What happened?</title><link href="http://astokes.org/post/what-happened"/><id>http://astokes.org/post/what-happened</id><content type="html">&lt;p&gt;Sorry was away, been busy. Setup and migrated my old blog posts over
+to octopress and hosting it on Linode.com. Some of the older blog
+posts may see double titles. The migration script I used automatically
+added them and eventually I&#39;ll get to cleaning them up. With that I&#39;ve
+been messing around with some Ruby to wrap my head around it and
+hopefully get some Rails development going for certain projects.&lt;/p&gt;
+
+&lt;p&gt;Lately, I&#39;ve started noticing a disconnect in services making it
+difficult for people to decide what products they should pay for in
+developing a web application. I feel the common items should be
+included in whatever platform you decide to go with.  For example,
+wufoo.com provides a Form building service. While they are good at
+what they provide I don&#39;t entirely agree with making this a service
+that requires any type of payment. The limit is 3 forms for their free
+account and once those are used up it starts at $15/mo. These are
+simple forms with a pretty UI for building.&lt;/p&gt;
+
+&lt;p&gt;Simply put, this is not a service that should require payment to
+build. This falls under a notable feature of a bigger product along
+with convenience of having it all accessable through a single
+interface. I realize there is an API provided for their service, but,
+there again it&#39;ll cost you additional fees if you need to do anything
+more than simple contact forms.&lt;/p&gt;
+
+&lt;h2 id=&#34;writingrubyplugins&#34;&gt;Writing Ruby plugins&lt;/h2&gt;
+
+&lt;p&gt;I was searching around for helpers for building gems for Ruby.  Come
+to find out it isn&#39;t that difficult to write a gemspec, however, I did
+find an interesting application that pretty much acts in a sane way
+when building a Ruby gem. &lt;a href=&#34;https://github.com/lazyatom/gem-this&#34;&gt;gem-this&lt;/a&gt; Pretty sweet little application
+as it doesn&#39;t add a bunch of less than useful files and pretty much
+sticks to the convention of keeping everything in a Rakefile and
+having that generate your gemspec during build. Not a bad idea and I
+like gem-this simplicity when it comes to building documentation,
+adding binaries, little-to-no learning curve, and overall keeping
+simple tasks simple.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ gem install gem-this
+&lt;/pre&gt;
+
+&lt;p&gt;One of the best things about gem-this is that it works on existing
+projects.  You&#39;d be suprised how many of these gem helpers require
+building a new project and including them as dependencies :\&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ gem-this .
+&lt;/pre&gt;
+
+&lt;p&gt;It&#39;ll append to your existing Rakefile or create a new one. Gemspecs
+are then generated with a rake task.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ rake gemspec
+&lt;/pre&gt;
+
+&lt;p&gt;Other little nice things are including rdoc support and building into
+its own directory for easy cleanup.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+$ rake gem
+&lt;/pre&gt;
+</content><updated>2012-09-27T00:00:59Z</updated></entry><entry><title>c++, cxxtest, cmake</title><link href="http://astokes.org/post/c-cxxtest-cmake"/><id>http://astokes.org/post/c-cxxtest-cmake</id><content type="html">&lt;p&gt;Been messing around lately with CMake and how to intregrate 
+additional testing frameworks such as CxxTest. So far everything
+has been very simple to configure and get setup so I thought 
+I&#39;d post my findings here.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fedora provides both cmake and cxxtest so install these first.&lt;/li&gt;
+&lt;li&gt;CMake provides a convenience macro called FindCxxTest.cmake&lt;/li&gt;
+&lt;li&gt;In your CMakeLists.txt append the following:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# cxxtest
+find_package(CxxTest)
+if(CXXTEST_FOUND)
+set(CXXTEST_USE_PYTHON TRUE)
+include_directories(${CXXTEST_INCLUDE_DIR})
+enable_testing()
+CXXTEST_ADD_TEST(unittest_sos check_sos.cpp ${SOS_TEST_PATH}/check_sos.h)
+target_link_libraries(unittest_sos sos)
+endif()
+&lt;/pre&gt;
+
+&lt;p&gt;The only custom variable here is SOS_TEST_PATH which basically points to $HOME/sos/tests/check_sos.h. See the &#39;set&#39; function in the cmake documentation.
+This is really all you need to do here. One note is to set the 
+CXXTEST_USE_PYTHON to TRUE b/c cmake provided in Fedora doesn&#39;t 
+contain the perl version of the test generator.  I&#39;m not going 
+to post how I setup the testcases b/c right now they are very simple, 
+however, if you would like to use my project as an example for implementing 
+cmake into your code have a look at: libsos&lt;/p&gt;
+
+&lt;p&gt;If anyone has any good information on using cmake with python build scripts I&#39;d love to see those. For RPM Builders the spec file was very simple. I used 
+the syntax within the kde builds:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+%build
+mkdir -p %{_target_platform}
+pushd %{_target_platform}
+cmake ..
+popd
+make %{?_smp_mflags} -C %{_target_platform}
+%install
+rm -rf $RPM_BUILD_ROOT
+make -C %{_target_platform} install DESTDIR=$RPM_BUILD_ROOT
+%clean
+rm -rf $RPM_BUILD_ROOT
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+%files
+%defattr(-,root,root,-)
+%doc
+%{_libdir}/%{name}.so.*
+%files devel
+%defattr(-,root,root,-)
+%doc
+%{_includedir}/%{name}
+%{_libdir}/%{name}.so*
+%{_libdir}/pkgconfig/%{name}.pc
+&lt;/pre&gt;
+
+&lt;p&gt;Hope this little bit will help others who are interested in cmake.&lt;/p&gt;
+</content><updated>2010-03-20T00:00:59Z</updated></entry><entry><title>Setup a broker federation in qpid</title><link href="http://astokes.org/post/setup-a-broker-federation-in-qpid"/><id>http://astokes.org/post/setup-a-broker-federation-in-qpid</id><content type="html">&lt;p&gt;One of the things with matahari is that we didn&#8217;t want our agents to be tied down to just 1 broker. With qpid we can setup broker federation and squash any of the use case scenarios that may involve differences in location, etc.&lt;/p&gt;
+
+&lt;p&gt;To start setup 2-3 brokers, in this writeup there are 2 brokers running on one machine and a 3rd on a second machine.&lt;/p&gt;
+
+&lt;p&gt;BrokerA has ip 192.168.1.3 and a port 10001
+BrokerB has ip 192.168.1.3 and a port 10002
+BrokerC has ip 192.168.1.5 and a port 10001&lt;/p&gt;
+
+&lt;p&gt;Startup all three brokers and for the 2 that are on the same machine some options will need to be set&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# BrokerA
+# qpidd -p 10001 --pid-dir /tmp/brokera --data-dir /tmp/brokera --auth no
+# BrokerB
+# qpidd -p 10002 --pid-dir /tmp/brokerb --data-dir /tmp/brokerb --auth no
+# BrokerC
+# qpidd -p 10001 --pid-dir /tmp/brokerc --data-dir /tmp/brokerc --auth no
+&lt;/pre&gt;
+
+&lt;p&gt;Now we need to link all 3 together (federated) into a broker exchange. To do so run the following on any of the machines with brokers to be linked or a machine with no broker at all. The next tools being listed do not require a broker to be running in order to network the brokers together.&lt;/p&gt;
+
+&lt;p&gt;qpid-route is the utility being used and for simplicities sake we will be setting up dynamic routes (described in section 1.4.3.2 of the previous link)&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# qpid-route dynamic add 192.168.1.3:10001 192.168.1.3:10002 amq.direct
+# qpid-route dynamic add 192.168.1.3:10002 192.168.1.3:10001 amq.direct
+# qpid-route dynamic add 192.168.1.3:10001 192.168.1.5:10001 amq.direct
+# qpid-route dynamic add 192.168.1.5:10001 192.168.1.3:10001 amq.direct
+
+# qpid-route dynamic add 192.168.1.3:10001 192.168.1.3:10002 qmf.default.direct
+# qpid-route dynamic add 192.168.1.3:10002 192.168.1.3:10001 qmf.default.direct
+# qpid-route dynamic add 192.168.1.3:10001 192.168.1.5:10001 qmf.default.direct
+# qpid-route dynamic add 192.168.1.5:10001 192.168.1.3:10001 qmf.default.direct
+
+# qpid-route dynamic add 192.168.1.3:10001 192.168.1.3:10002 qmf.default.topic
+# qpid-route dynamic add 192.168.1.3:10002 192.168.1.3:10001 qmf.default.topic
+# qpid-route dynamic add 192.168.1.3:10001 192.168.1.5:10001 qmf.default.topic
+# qpid-route dynamic add 192.168.1.5:10001 192.168.1.3:10001 qmf.default.topic
+&lt;/pre&gt;
+
+&lt;p&gt;Now I know this looks like a lot of repetition but the above is required since we are creating a bidirectional route. Looking carefully we see that the brokers are being flipped an added to the same exchange.&lt;/p&gt;
+
+&lt;p&gt;Speaking of broker exchange you&#8217;ll notice amq.direct, qmf.default.direct, qmf.default.topic. These exchanges are the default exchanges that need to be supported in any AMQP broker. To get a better idea of these routing algorithms there is a blogpost that covers it pretty clearly.&lt;/p&gt;
+
+&lt;p&gt;Moving on we need to do a quick check on the topology which can be accomplished with the following&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# qpid-route route map 192.168.13:10001
+
+Finding Linked Brokers:
+192.168.1.3:10001... Ok
+192.168.1.5:10001... Ok
+192.168.1.3:10002... Ok
+
+Dynamic Routes:
+
+Exchange qmf.default.topic:
+192.168.1.5:10001 &lt;=&gt; 192.168.1.3:10001
+192.168.1.3:10002 &lt;=&gt; 192.168.1.3:10001
+
+Exchange qmf.default.direct:
+192.168.1.5:10001 &lt;=&gt; 192.168.1.3:10001
+192.168.1.3:10002 &lt;=&gt; 192.168.1.3:10001
+
+Exchange amq.direct:
+192.168.1.5:10001 &lt;=&gt; 192.168.1.3:10001
+192.168.1.3:10002 &lt;=&gt; 192.168.1.3:10001
+
+Static Routes:
+none found
+&lt;/pre&gt;
+
+&lt;p&gt;The brokers are now federated (networked together) so lets do something useful. We will connect one of matahari&#8217;s core agent to any of the brokers on both machines.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# matahari-hostd --port 10001 --broker 192.168.1.5
+
+# matahari-hostd --port 10001 --broker 192.168.1.3
+&lt;/pre&gt;
+
+&lt;p&gt;Above we&#8217;ve just connected the agent on one machine to the broker on the other and vice versa. So now if we bring up qpid-tool on BrokerB we should see that 2 agents are connected within this broker network and we will be able to interact with those agents no matter where we are.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# qpid-tool 192.168.1.3:10002
+
+qpid: agents
+Agent Name                                                 Label QMF version
+1.0 BrokerAgent                                            QMFv2
+1.redhat.com:matahari:4d3d4442-562a-4514-a639-b366ef17e306 QMFv2 Agent 2
+1.redhat.com:matahari:fb7584d4-8d10-4cea-ab30-ae4afaea1060 QMFv2 Agent 2
+&lt;/pre&gt;
+
+&lt;p&gt;With both agents connected we can access their methods and pull some data from it.&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+    qpid: list host
+    Object Summary:
+       ID   Created   Destroyed  Index
+       =====================================================
+       161  22:03:47  -          com.redhat.matahari:host:
+       101  21:05:51  -          com.redhat.matahari:host:
+
+    qpid: show 161
+    Object of type: com.redhat.matahari:host:_data(7297d90c-5e2a-557c-7b58-90cdd4d916f2)
+       Attribute         161
+       ===================================================================
+       uuid              ec742c182da05427605f96b300000014
+       hostname          im.gangstar.com
+       is_virtual        False
+       operating_system  Linux (2.6.34.7-61.fc13.i686)
+       memory            3057352
+       swap              2047996
+       arch              i686
+       hypervisor       
+       platform          32
+       processors        2
+       cores             4
+       model             Intel(R) Core(TM)2 Duo CPU     T9600  @ 2.80GHz
+       last_updated_seq  83
+       last_updated      Fri Nov 12 22:10:37 2010
+       load_average_1    0.000000
+       load_average_5    0.020000
+       load_average_15   0.000000
+       memFree           186788
+       swapFree          1987552
+       procTotal         394
+       procRunning       1
+
+    qpid: show 101
+    Object of type: com.redhat.matahari:host:_data(7297d90c-5e2a-557c-7b58-90cdd4d916f2)
+       Attribute         101
+       ===================================================================
+       uuid              3d4c71ac60c0b113d8ce73b700000016
+       hostname         im.gangster-twice.com
+       is_virtual        False
+       operating_system  Linux (2.6.34.7-61.fc13.i686)
+       memory            2036688
+       swap              4095996
+       arch              i686
+       hypervisor       
+       platform          32
+       processors        2
+       cores             4
+       model             Intel(R) Core(TM)2 Duo CPU     T7500  @ 2.20GHz
+       last_updated_seq  795
+       last_updated      Fri Nov 12 22:12:03 2010
+       load_average_1    0.120000
+       load_average_5    0.120000
+       load_average_15   0.110000
+       memFree           168912
+       swapFree          4091164
+       procTotal         384
+       procRunning       4
+&lt;/pre&gt;
+
+&lt;p&gt;Pretty simple and really cool :D&lt;/p&gt;
+</content><updated>2010-02-12T00:00:59Z</updated></entry><entry><title>Fedora 8, Thinkpad T61, fingerprint authentication</title><link href="http://astokes.org/post/fedora-8-thinkpad-t61-fingerprint-authentication"/><id>http://astokes.org/post/fedora-8-thinkpad-t61-fingerprint-authentication</id><content type="html">Using a T61 or any IBM laptop that has the fingerprint scanner install the package thinkfinger :&lt;br /&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# yum install thinkfinger
+&lt;/pre&gt;
+
+&lt;p&gt;Add your user:&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# su -
+# tf-tool --add-user adam
+&lt;/pre&gt;
+
+&lt;p&gt;Swipe your finger 3 times.&lt;/p&gt;
+
+&lt;p&gt;Alter /etc/pam.d/system-auth to include the think_finger pam module. Mine looks like :&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+#%PAM-1.0# This file is auto-generated.
+# User changes will be destroyed the next time authconfig is run.
+auth        required      pam_env.so
+auth        sufficient    pam_thinkfinger.so
+auth        sufficient    pam_unix.so nullok try_first_pass
+auth        requisite     pam_succeed_if.so uid &gt;= 500 quiet
+auth        required      pam_deny.so
+account     required      pam_unix.so
+account     sufficient    pam_localuser.so
+account     sufficient    pam_succeed_if.so uid 
+account     required      pam_permit.so
+password    requisite     pam_cracklib.so try_first_pass retry=3
+password    sufficient    pam_unix.so md5 shadow nullok try_first_pass use_authtok
+password    required      pam_deny.so
+session     optional      pam_keyinit.so revoke
+session     required      pam_limits.so
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_unix.so
+&lt;/pre&gt;
+
+&lt;p&gt;Once complete logout of Gnome, and attempt to login by clicking or typing your associated user name and then swipe your finger :)&lt;/p&gt;
+</content><updated>2008-02-20T00:00:59Z</updated></entry><entry><title>VMWare Server installed as host on FC6</title><link href="http://astokes.org/post/vmware-server-installed-as-host-on-fc6"/><id>http://astokes.org/post/vmware-server-installed-as-host-on-fc6</id><content type="html">If you run into errors related to this :&lt;br /&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+make[1]: Entering directory `/usr/src/kernels/2.6.18-1.2798.fc6-i686&#39; 
+CC [M]  /tmp/vmware-config1/vmnet-only/driver.o 
+CC [M]  /tmp/vmware-config1/vmnet-only/hub.o 
+CC [M]  /tmp/vmware-config1/vmnet-only/userif.o 
+CC [M]  /tmp/vmware-config1/vmnet-only/netif.o
+CC [M]  /tmp/vmware-config1/vmnet-only/bridge.o 
+CC [M]  /tmp/vmware-config1/vmnet-only/procfs.o
+/tmp/vmware-config1/vmnet-only/procfs.c:33:26: error: linux/config.h: No such file or directory
+make[2]: *** [/tmp/vmware-config1/vmnet-only/procfs.o] Error 1
+make[1]: *** [_module_/tmp/vmware-config1/vmnet-only] Error 2
+make[1]: Leaving directory `/usr/src/kernels/2.6.18-1.2798.fc6-i686&#39;
+make: *** [vmnet.ko] Error 2
+make: Leaving directory `/tmp/vmware-config1/vmnet-only &#39;Unable to build the vmnet module.
+&lt;/pre&gt;
+
+&lt;p&gt;That is because config.h does not exist and is being deprecated in 2.6.18-1.2798.fc6 and beyond.To solve this :&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# touch /usr/src/kernels/2.6.18-1.2798.fc6-i686/include/linux/config.h
+&lt;/pre&gt;
+
+&lt;p&gt;Once complete your VMware server should successfully complete
+vmware-config.pl and you can continue using this product.If it stills
+fails please see this thread for other ideas :
+http://www.vmware.com/community/thread.jspa?messageID=501043&#38;amp;#501043&lt;/p&gt;
+</content><updated>2006-11-09T00:00:59Z</updated></entry><entry><title>VIM tips</title><link href="http://astokes.org/post/vim-tips"/><id>http://astokes.org/post/vim-tips</id><content type="html">&lt;p&gt;Just thought I would post some things I find helpful when working with
+VIM. Remember if you are running Fedora Core you can install VIM with
+the following command: Also for those curious, here is my vimrc file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  yum install vim-enhanced
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That should pick up the dependencies as necessary.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Setting line numbers and word wrap&lt;/strong&gt;
+Ok to get started I like to have line numbers and no word wrapping in
+my code. Lets first create our rc file for vim (&lt;strong&gt;&lt;em&gt;~/.vimrc&lt;/em&gt;&lt;/strong&gt;)&lt;/p&gt;
+
+&lt;p&gt;Now we are going to add the following 2 lines for the above:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  set nu!
+  set wrap!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Mapping key binds&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I like to use buffer windows for editing several files and so I need 
+a quick way of switching from windows to windows.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  map &#38;lt;F9&#38;gt; &#38;lt;esc&#38;gt;:bprevious&#38;lt;cr&#38;gt;
+  map &#38;lt;F10&#38;gt; &#38;lt;esc&#38;gt;:bnext&#38;lt;cr&#38;gt;
+  imap &#38;lt;F9&#38;gt; &#38;lt;esc&#38;gt;:bprevious&#38;lt;cr&#38;gt;
+  imap &#38;lt;F10&#38;gt; &#38;lt;esc&#38;gt;:bnext&#38;lt;cr&#38;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;imap&lt;/em&gt;&lt;/strong&gt; is for switching buffers in insert mode. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;General commands and usage within VIM&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Basically from here on all commands can be typed while in VIM by
+starting the command with &#39;:&#39;, for example,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  :color elflord
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will force VIM to set a general color and for syntax highlighting 
+purposes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Simple search and replace&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Search and replace is fairly straight forward. Normally I will 
+just start at the beginning of a document and search the whole 
+thing replacing as necessary. To do so type the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  :%s/word-to-search/replace-with/g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now if you wish to just search a line and replace whats in the line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  :s/word-to-search/replace-with/g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Please note that it is important to end the search string with &lt;strong&gt;/g&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Commenting a section of text anywhere in the file&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;First mark the top of the section you wish to comment out by moving 
+your cursor to that section and type &lt;strong&gt;ma&lt;/strong&gt;. Next move to the end 
+of the section you wish to comment and type &lt;strong&gt;mb&lt;/strong&gt;. Finally get into 
+command mode by hitting &lt;strong&gt;:&lt;/strong&gt; and comment that block of text by
+typing:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  :&#39;a,&#39;b s/^/#/g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You may also do this in visual mode by hitting &lt;strong&gt;v&lt;/strong&gt; and hilighting
+the lines you wish to comment out and typing:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  :&#39;a,&#39;b s/^/#/g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Turning tabs into spaces&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  :set expandtab
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To convert all existing tabs to spaces&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  :retab
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Below are links I used for reference:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.rayninfo.co.uk/vimtips.html&#34;&gt;vim-tips&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.nuxified.org/vi_survival_guide&#34;&gt;vim-survival-guide&lt;/a&gt;&lt;/p&gt;
+</content><updated>2005-08-23T00:00:59Z</updated></entry><entry><title>Configuring imap with mutt</title><link href="http://astokes.org/post/configuring-imap-with-mutt"/><id>http://astokes.org/post/configuring-imap-with-mutt</id><content type="html">&lt;p&gt;Place this in your ~/.muttrc&lt;/p&gt;
+
+&lt;pre class=&#34;prettyprint&#34;&gt;
+# This configures mutt to use IMAP(S) server, however, you&#39;ll need to
+# setup sendmail/postfix/alternative smtp server to enable sending 
+# mail out :)
+my_hdr From: user@example.com (Joe Blow)
+# sets the location for your spool mailbox - 
+# the INBOX setting should work on most imap servers
+set spoolfile=imaps://mail.server.com/INBOX
+# Specifies  the  default  location  of your mailboxes.
+set folder=imaps://mail.server.com/
+#  Your login name on the IMAP server. 
+# Put in a value here to avoid typing in your username 
+# each time you start mutt
+set imap_user=username
+# Specifies the password for your IMAP account.  
+# Warning: you should only use this option when you are on 
+# a fairly secure machine
+# set imap_pass=xyz
+# Set this to no to avoid mutt asking you whether you want 
+# to move your mail to the local mbox 
+set move=no
+# If you have more than one mailbox then. 
+# This is how long mutt will wait between scanning for 
+# incoming mail
+set mail_check=60
+# Mutt will only scan curently open mailbox for new mail 
+# every 10 minutes by default. Set to 15 seconds 
+set timeout=15
+&lt;/pre&gt;
+</content><updated>2005-07-25T00:00:59Z</updated></entry></feed>
