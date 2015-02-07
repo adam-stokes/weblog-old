@@ -2,12 +2,7 @@
 title: About Me
 author: Adam Stokes
 layout: page
-cpr_mtb_plg:
-  - 'a:24:{s:14:"aboutme-widget";s:1:"1";s:22:"advanced-custom-fields";s:1:"1";s:15:"awesome-weather";s:1:"1";s:12:"easy-wp-smtp";s:1:"1";s:13:"et-shortcodes";s:1:"1";s:23:"font-awesome-more-icons";s:1:"1";s:21:"gist-github-shortcode";s:1:"1";s:17:"google-typography";s:1:"1";s:24:"google-sitemap-generator";s:1:"1";s:7:"jetpack";s:1:"1";s:17:"kebo-twitter-feed";s:1:"1";s:15:"kush-micro-news";s:1:"1";s:15:"social-stickers";s:1:"1";s:10:"tablepress";s:1:"1";s:15:"twitter-tracker";s:1:"1";s:15:"white-label-cms";s:1:"1";s:16:"widgets-on-pages";s:1:"1";s:13:"font-uploader";s:1:"1";s:13:"wordpress-seo";s:1:"1";s:7:"wp-ffpc";s:1:"1";s:11:"wp-markdown";s:1:"1";s:16:"wp-atom-importer";s:1:"1";s:10:"wp-smushit";s:1:"1";s:21:"wp-social-seo-booster";s:1:"1";}'
-dsq_thread_id:
-  - 2638307933
 ---
-[![endorse][1]][2]
 
 Currently, a technical lead solutions engineer for Canonical Ltd. Our group focuses on research and development efforts to extend Ubuntu&#8217;s position in the Cloud space. Browse our [GitHub page][3] to see our current projects.
 
