@@ -3,15 +3,6 @@ layout: page
 status: publish
 published: true
 title: About Me
-author:
-  display_name: Adam Stokes
-  login: adam.stokes
-  email: adam.stokes@gmail.com
-  url: ''
-author_login: adam.stokes
-author_email: adam.stokes@gmail.com
-wordpress_id: 7
-wordpress_url: http://beta.astokes.org/?page_id=7
 date: '2013-09-20 16:34:17 -0400'
 date_gmt: '2013-09-20 16:34:17 -0400'
 categories: []

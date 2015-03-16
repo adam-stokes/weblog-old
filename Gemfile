@@ -1,7 +1,10 @@
-# A sample Gemfile
+# -*- mode:ruby; -*-
 source "https://rubygems.org"
+gem 'bundler', '>= 1.8.4'
 
-# gem "rails"
 gem "redcarpet"
 gem "rouge"
 gem "jekyll"
+gem "jekyll-assets"
+gem "uglifier"
+gem "sass"
