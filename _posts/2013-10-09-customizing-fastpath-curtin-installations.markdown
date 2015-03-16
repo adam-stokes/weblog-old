@@ -29,7 +29,9 @@ tags:
 <h2>Example scenario</h2>
 <p><strong>Setting up vlans during a fastpath installation.</strong></p>
 <p>On the <strong><a href="http://maas.ubuntu.com">MAAS</a></strong> server edit <code>/etc/maas/preseeds/curtin_userdata</code> and write the following (substituting your vlan configuration):</p>
-<pre><code># vlan config
+
+```yaml
+# vlan config
 bucket:
   &myinterfaces |
    # This file describes the network interfaces available on your system
@@ -73,6 +75,7 @@ network_commands:
 
 power_state:
   mode: reboot
+```
 
 {% raw %}
 {{if node.architecture in {'i386/generic', 'amd64/generic'} }}
