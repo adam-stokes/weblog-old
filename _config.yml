@@ -14,4 +14,3 @@ assets:
     js: uglifier
     css: sass
 exclude: ['bower_components']
-paginate: 5

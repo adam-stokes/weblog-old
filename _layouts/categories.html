@@ -1,0 +1,12 @@
+---
+layout: default
+---
+
+{% for post in site.posts %}
+<div class="ui divided selection list">
+  <a class="item" href="{{ post.url | prepend: site.baseurl }}">
+    <div class="ui red horizontal label">{{ post.date | date: "%b %-d, %Y" }}</div>
+    {{ post.title }}
+  </a>
+</div>
+{% endfor %}
