@@ -3,15 +3,7 @@ layout: post
 status: publish
 published: true
 title: sosreport (SoS) version 3.2 released
-author:
-  display_name: Adam Stokes
-  login: adam.stokes
-  email: adam.stokes@gmail.com
-  url: ''
-author_login: adam.stokes
-author_email: adam.stokes@gmail.com
-wordpress_id: 638
-wordpress_url: http://astokes.org/?p=638
+author: Adam Stokes
 date: '2014-09-30 13:55:32 -0400'
 date_gmt: '2014-09-30 17:55:32 -0400'
 categories:

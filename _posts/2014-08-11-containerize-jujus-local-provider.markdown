@@ -3,15 +3,7 @@ layout: post
 status: publish
 published: true
 title: Containerize juju's local provider
-author:
-  display_name: Adam Stokes
-  login: adam.stokes
-  email: adam.stokes@gmail.com
-  url: ''
-author_login: adam.stokes
-author_email: adam.stokes@gmail.com
-wordpress_id: 573
-wordpress_url: http://astokes.org/?p=573
+author: Adam Stokes
 date: '2014-08-11 19:05:40 -0400'
 date_gmt: '2014-08-11 23:05:40 -0400'
 categories:

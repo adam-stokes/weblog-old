@@ -3,15 +3,7 @@ layout: post
 status: publish
 published: true
 title: Perl bindings for LeanKit.com
-author:
-  display_name: Adam Stokes
-  login: adam.stokes
-  email: adam.stokes@gmail.com
-  url: ''
-author_login: adam.stokes
-author_email: adam.stokes@gmail.com
-wordpress_id: 642
-wordpress_url: http://astokes.org/?p=642
+author: Adam Stokes
 date: '2014-10-07 15:38:17 -0400'
 date_gmt: '2014-10-07 19:38:17 -0400'
 categories:

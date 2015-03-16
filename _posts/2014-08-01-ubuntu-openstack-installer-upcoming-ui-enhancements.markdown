@@ -3,15 +3,7 @@ layout: post
 status: publish
 published: true
 title: Ubuntu Openstack Installer - upcoming ui enhancements
-author:
-  display_name: Adam Stokes
-  login: adam.stokes
-  email: adam.stokes@gmail.com
-  url: ''
-author_login: adam.stokes
-author_email: adam.stokes@gmail.com
-wordpress_id: 553
-wordpress_url: http://astokes.org/?p=553
+author: Adam Stokes
 date: '2014-08-01 02:34:43 -0400'
 date_gmt: '2014-08-01 06:34:43 -0400'
 categories:

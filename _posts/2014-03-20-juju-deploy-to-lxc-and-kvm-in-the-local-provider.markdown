@@ -3,15 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'juju: deploy to lxc AND kvm in the local provider'
-author:
-  display_name: Adam Stokes
-  login: adam.stokes
-  email: adam.stokes@gmail.com
-  url: ''
-author_login: adam.stokes
-author_email: adam.stokes@gmail.com
-wordpress_id: 506
-wordpress_url: http://astokes.org/?p=506
+author: Adam Stokes
 date: '2014-03-20 10:09:38 -0400'
 date_gmt: '2014-03-20 14:09:38 -0400'
 categories:

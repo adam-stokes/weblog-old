@@ -3,15 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'new juju plugin: juju-sos'
-author:
-  display_name: Adam Stokes
-  login: adam.stokes
-  email: adam.stokes@gmail.com
-  url: ''
-author_login: adam.stokes
-author_email: adam.stokes@gmail.com
-wordpress_id: 510
-wordpress_url: http://astokes.org/?p=510
+author: Adam Stokes
 date: '2014-04-23 01:52:59 -0400'
 date_gmt: '2014-04-23 05:52:59 -0400'
 categories:

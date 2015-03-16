@@ -5,3 +5,7 @@ description: >
   sad
 timezone: Amercia/New_York
 permalink: /:title
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
+highlighter: rouge
