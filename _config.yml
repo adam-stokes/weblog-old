@@ -3,3 +3,5 @@ name: Adam Stokes
 description: >
   struck gold, spent it all on amazon, /me
   sad
+timezone: Amercia/New_York
+permalink: /:title
