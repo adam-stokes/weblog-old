@@ -4,11 +4,20 @@ layout: default
 <h1 class="ui dividing header">{{ site.name }}
   <small>{{ site.description }}</small>
 </h1>
-{% for post in site.posts %}
-<div class="ui divided selection list">
-  <a class="item" href="{{ post.url | prepend: site.baseurl }}">
-    <div class="ui red horizontal label">{{ post.date | date: "%b %-d, %Y" }}</div>
-    {{ post.title }}
-  </a>
-</div>
+<div class="ui padded grid">
+  {% for post in site.posts %}
+  <div class="one wide column">
+    <div class="ui horizontal label">{{ post.date | date: "%b %-d, %Y" }}</div>
+  </div>
+  <div class="five wide column">
+    <a class="ui item red fluid button" href="{{ post.url | prepend: site.baseurl }}">
+      {{ post.title }}
+    </a>
+  </div>
+  <div class="ten wide column">
+    {% for cat in post.categories %}
+    <div class="ui tag mini green label">{{ cat }}</div>
+    {% endfor %}
+  </div>
 {% endfor %}
+</div>
